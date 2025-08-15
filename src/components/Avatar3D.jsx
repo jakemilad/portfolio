@@ -73,7 +73,6 @@ function PlaceholderAvatar(props) {
 
   return (
     <group position={[0, -1.2, 0]} scale={1} {...props}>
-      {/* Head */}
       <mesh
         ref={meshRef}
         position={[0, 1, 0]}
@@ -186,7 +185,7 @@ export default function Avatar3D({
 }
 
 
-useGLTF.preload('/models/dance.glb');
-useGLTF.preload('/models/agree.glb');
-useGLTF.preload('/models/walk.glb');
-useGLTF.preload('/models/run.glb');
+useGLTF.preload('/models/dance-compressed.glb');
+useGLTF.preload('/models/agree-compressed.glb');
+useGLTF.preload('/models/walk-compressed.glb');
+useGLTF.preload('/models/run-compressed.glb');

@@ -25,10 +25,10 @@ const NinetyHomepage = () => {
 
 
   const animations = [
-    { id: 'dance', name: 'Dance', emoji: '🕺', model: '/models/dance.glb' },
-    { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree.glb' },
-    { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk.glb' },
-    { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run.glb' }
+    { id: 'dance', name: 'Dance', emoji: '🕺', model: '/models/dance-compressed.glb' },
+    { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
+    { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk-compressed.glb' },
+    { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run-compressed.glb' }
   ];
 
   const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
