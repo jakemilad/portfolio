@@ -1,7 +1,8 @@
+'use client';
 import React from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
-
+import Image from 'next/image';
 const About = () => {
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
@@ -32,7 +33,7 @@ const About = () => {
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4">
             <div className="border-2 border-[#808080] border-inset p-2">
               <div className="aspect-square bg-gray-700 flex items-center justify-center">
-                <p className="text-yellow-300">[ Your Photo Here ]</p>
+                <Image src="/img.jpg" alt="Jake Milad" width={350} height={350} />
               </div>
             </div>
             <p className="mt-2 text-yellow-300 animate-[blink_1s_infinite]">
