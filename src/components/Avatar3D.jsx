@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, useGLTF, Text, Float } from '@react-three/drei';
@@ -84,13 +85,11 @@ function PlaceholderAvatar(props) {
         <meshStandardMaterial color={hovered ? "#ff6b6b" : "#4ecdc4"} />
       </mesh>
       
-      {/* Body */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.3, 0.4, 1, 8]} />
         <meshStandardMaterial color="#95e1d3" />
       </mesh>
       
-      {/* Arms */}
       <mesh position={[-0.6, 0.3, 0]} rotation={[0, 0, Math.PI / 6]}>
         <cylinderGeometry args={[0.1, 0.1, 0.8, 8]} />
         <meshStandardMaterial color="#fce38a" />
@@ -100,7 +99,6 @@ function PlaceholderAvatar(props) {
         <meshStandardMaterial color="#fce38a" />
       </mesh>
       
-      {/* Eyes */}
       <mesh position={[-0.2, 1.1, 0.4]}>
         <sphereGeometry args={[0.05, 8, 8]} />
         <meshStandardMaterial color="black" />
@@ -147,7 +145,7 @@ export default function Avatar3D({
     >
       <Canvas>
 
-        <PerspectiveCamera makeDefault position={[0, 2, 5]} />2
+        <PerspectiveCamera makeDefault position={[0, 0.5, 5]} />
         
 
         <ambientLight intensity={0.6} />

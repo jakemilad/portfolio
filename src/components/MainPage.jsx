@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -271,9 +272,12 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
             {[
               '🎓 UBC Business & Computer Science Degree',
               '👨‍💻 2+ years of Software Engineering Experience',
+              '🔧 Site reliability engineering at lululemon',
               '🧮 Addicted to taking business problems and applying technical solutions',
-              '🔍 Observability enjoyer',
               '✨ Obsessed with driving key metrics',
+              '🔍 Observability enjoyer',
+              '🚴 Big cycling enthusiast',
+              '⚽ Loyal Arsenal fan',
             ].map((text, i) => (
               <p key={i} className="my-2">
                 <RainbowText>{text}</RainbowText>
@@ -309,7 +313,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
 
         <p className="text-xs text-gray-500">
-          © 1998 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of HTML
+          © 2001 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of HTML
         </p>
       </div>
 
