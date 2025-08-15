@@ -1,14 +1,13 @@
 import React from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
+import Link from 'next/link';
 
 const About = () => {
-
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
       {children}
     </span>
   );
-
 
   const Divider = () => (
     <div className="flex items-center justify-center my-4">
@@ -23,19 +22,15 @@ const About = () => {
   return (
     <div className="min-h-screen bg-black bg-[url('/api/placeholder/100/100')] bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5">
       <div className="max-w-4xl mx-auto bg-[#000033] border-[5px] border-[#c0c0c0] border-solid p-5">
-
         <RainbowText className="text-5xl font-bold block mb-6 [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff]">
           About Me
         </RainbowText>
 
         <Divider />
 
-
         <div className="grid md:grid-cols-2 gap-8 my-8">
-
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4">
             <div className="border-2 border-[#808080] border-inset p-2">
-
               <div className="aspect-square bg-gray-700 flex items-center justify-center">
                 <p className="text-yellow-300">[ Your Photo Here ]</p>
               </div>
@@ -45,12 +40,10 @@ const About = () => {
             </p>
           </div>
 
-
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 text-left">
             <h2 className="text-2xl mb-4">
               <RainbowText>👋 Hello World!</RainbowText>
             </h2>
-
             <div className="space-y-4 text-green-400">
               <p>As you can see, I'm absolutely cracked out of my mind at frontend developement. Famously invented centering divs.</p>
             </div>
@@ -59,13 +52,11 @@ const About = () => {
 
         <Divider />
 
-
         <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 my-8">
           <h2 className="text-2xl mb-4">
             <RainbowText>🚀 Super Cool Skills 🚀</RainbowText>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-
             {['React', 'Next.js', 'Tailwind', 'Python', 'Datadog', 'Splunk', 'Kubernetes', 'Docker', 'Terraform', 'Git', 'CI/CD', 'Observability', 'AWS'].map((skill, i) => (
               <div
                 key={i}
@@ -77,8 +68,7 @@ const About = () => {
           </div>
         </div>
 
-
-        <a
+        <Link
           href="/"
           className="inline-block bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-3 hover:text-yellow-300"
         >
@@ -87,9 +77,8 @@ const About = () => {
           <RainbowText>Back to Homepage</RainbowText>
           {' '}
           <span className="animate-[bounce_1s_ease-in-out_infinite] inline-block">👈</span>
-        </a>
+        </Link>
       </div>
-
 
       <style jsx global>{`
         @keyframes rainbow {

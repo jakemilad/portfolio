@@ -1,6 +1,8 @@
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 
 const Avatar3D = dynamic(() => import('./Avatar3D'), { 
@@ -220,17 +222,16 @@ const NinetyHomepage = () => {
           {[
             ['About Me', '/about', '👤'],
             ['My Cool Stuff', '/portfolio', '🎮'],
-            ['3D Avatar', '/avatar', '🤖'],
             ['Sign My Guestbook!', '/guestbook', '📖']
           ].map(([text, href, icon], i) => (
             <React.Fragment key={text}>
-              <a 
+              <Link 
                 href={href}
                 className="text-xl text-green-400 no-underline mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
               >
                 <span className="animate-[pulse_2s_infinite]">{icon}</span>
                 <RainbowText>{text}</RainbowText>
-              </a>
+              </Link>
               <span className="inline-block animate-[spin_3s_linear_infinite]">💫</span>
             </React.Fragment>
           ))}
