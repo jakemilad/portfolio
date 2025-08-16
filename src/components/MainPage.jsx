@@ -359,7 +359,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
         <div className="overflow-hidden whitespace-nowrap my-5">
           <div className="animate-[marquee_15s_linear_infinite]">
-            ⭐️ Best viewed at 800x600 resolution ⭐️ Sound ON! ⭐️ Made with Microsoft FrontPage 98 ⭐️
+            ⭐️ Best viewed at 800x600 resolution ⭐️ Sound ON! ⭐️
           </div>
         </div>
 
