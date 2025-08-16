@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
+import ContactCard from './ContactCard';
 
 class Avatar3DErrorBoundary extends React.Component {
   constructor(props) {
@@ -336,48 +336,9 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           </h2>
           
           <div className="max-w-md mx-auto space-y-4">
-            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
-              <a 
-                href="mailto:jake.milad@alumni.ubc.ca"
-                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
-              >
-                <span className="text-2xl animate-[bounce_2s_infinite]">📧</span>
-                <div className="text-center">
-                  <div className="text-lg font-bold">EMAIL</div>
-                  <div className="text-sm font-mono group-hover:underline">jake.milad@alumni.ubc.ca</div>
-                </div>
-              </a>
-            </div>
-
-            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
-              <a 
-                href="https://linkedin.com/in/jakemilad"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
-              >
-                <span className="text-2xl animate-[bounce_2s_infinite]" style={{animationDelay: '0.5s'}}>💼</span>
-                <div className="text-center">
-                  <div className="text-lg font-bold">LINKEDIN</div>
-                  <div className="text-sm font-mono group-hover:underline">linkedin.com/in/jakemilad</div>
-                </div>
-              </a>
-            </div>
-
-            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
-              <a 
-                href="https://github.com/jakemilad"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
-              >
-                <span className="text-2xl animate-[bounce_2s_infinite]" style={{animationDelay: '1s'}}>👨‍💻</span>
-                <div className="text-center">
-                  <div className="text-lg font-bold">GITHUB</div>
-                  <div className="text-sm font-mono group-hover:underline">github.com/jakemilad</div>
-                </div>
-              </a>
-            </div>
+            <ContactCard href="mailto:jake.milad@gmail.com" icon="📧" title="EMAIL" value="jake.milad@gmail.com" />
+            <ContactCard href="https://linkedin.com/in/jakemilad" icon="💼" title="LINKEDIN" value="https://linkedin.com/in/jakemilad" />
+            <ContactCard href="https://github.com/jakemilad" icon="👨‍💻" title="GITHUB" value="https://github.com/jakemilad" />
           </div>
 
           <div className="mt-6 text-center">
