@@ -247,7 +247,7 @@ const NinetyHomepage = () => {
             
             <div className="mt-1 text-center">
               <div className="text-green-400 font-mono text-xs animate-pulse">
-                ● JAKE.EXE - {animations.find(a => a.id === currentAnimation)?.name.toUpperCase()} MODE
+                ● JAKE - {animations.find(a => a.id === currentAnimation)?.name.toUpperCase()} MODE
               </div>
             </div>
           </div>
