@@ -21,7 +21,7 @@ const About = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black bg-[url('/api/placeholder/100/100')] bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5">
+    <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5">
       <div className="max-w-4xl mx-auto bg-[#000033] border-[5px] border-[#c0c0c0] border-solid p-5">
         <RainbowText className="text-5xl font-bold block mb-6 [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff]">
           About Me

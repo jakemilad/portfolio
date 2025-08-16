@@ -12,7 +12,7 @@ function AvatarModel({ modelPath, ...props }) {
   const [clicked, setClicked] = useState(false);
   
 
-  const { scene, animations } = useGLTF(modelPath || '/placeholder-avatar.glb');
+  const { scene, animations } = useGLTF(modelPath || '/models/dance-compressed.glb');
   
 
   const mixer = useRef();
@@ -107,7 +107,6 @@ function PlaceholderAvatar(props) {
         <meshStandardMaterial color="black" />
       </mesh>
       
-      {/* Floating text when clicked */}
       {clicked && (
         <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
           <Text
@@ -128,6 +127,44 @@ function PlaceholderAvatar(props) {
 
 
 
+function detectWebGLSupport() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    return !!gl;
+  } catch (e) {
+    return false;
+  }
+}
+
+function FallbackAvatar({ className = "" }) {
+  const [currentEmoji, setCurrentEmoji] = useState('🤖');
+  const emojis = ['🤖', '👨‍💻', '🧑‍💻', '💻', '🎮', '🚀'];
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+    }, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-900 border-2 border-gray-400 ${className}`}>
+      <div className="text-8xl mb-4 animate-bounce">
+        {currentEmoji}
+      </div>
+      <div className="text-green-400 text-center px-4">
+        <div className="text-lg font-bold mb-2">Jake Milad</div>
+        <div className="text-sm">Software Engineer</div>
+        <div className="text-xs mt-2 text-yellow-300">
+          (3D mode unavailable - using 2D fallback)
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Avatar3D({ 
   modelPath, 
   enableControls = true, 
@@ -136,13 +173,53 @@ export default function Avatar3D({
   style = {}
 }) {
   const [modelError, setModelError] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
+  const [webglError, setWebglError] = useState(null);
+
+  useEffect(() => {
+    // Check WebGL support on mount
+    if (!detectWebGLSupport()) {
+      setWebglSupported(false);
+    }
+  }, []);
+
+  // Error boundary for Canvas
+  const handleCanvasError = (error) => {
+    console.warn('Canvas/WebGL Error:', error);
+    setWebglError(error);
+    setWebglSupported(false);
+  };
+
+  // If WebGL isn't supported or failed, show fallback
+  if (!webglSupported || webglError) {
+    return (
+      <div 
+        className={`w-full h-full ${className}`}
+        style={{ minHeight: '400px', ...style }}
+      >
+        <FallbackAvatar className="h-full" />
+      </div>
+    );
+  }
 
   return (
     <div 
       className={`w-full h-full ${className}`}
       style={{ minHeight: '400px', ...style }}
     >
-      <Canvas>
+      <Canvas 
+        onError={handleCanvasError}
+        onCreated={({ gl }) => {
+          gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          gl.outputColorSpace = THREE.SRGBColorSpace;
+        }}
+        gl={{
+          alpha: true,
+          antialias: false,
+          powerPreference: "default",
+          failIfMajorPerformanceCaveat: false
+        }}
+      >
 
         <PerspectiveCamera makeDefault position={[0, 0.5, 5]} />
         

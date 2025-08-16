@@ -6,6 +6,30 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 
+class Avatar3DErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.warn('Avatar3D Error Boundary caught an error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || <Simple2DAvatar />;
+    }
+
+    return this.props.children;
+  }
+}
+
+
 const Avatar3D = dynamic(() => import('./Avatar3D'), { 
   ssr: false,
   loading: () => (
@@ -15,6 +39,20 @@ const Avatar3D = dynamic(() => import('./Avatar3D'), {
   )
 });
 
+const Simple2DAvatar = () => (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-purple-900 border-2 border-gray-400">
+    <div className="text-6xl mb-4 animate-bounce">👨‍💻</div>
+    <div className="text-green-400 text-center">
+      <div className="text-lg font-bold">Jake Milad</div>
+      <div className="text-sm">Software Engineer</div>
+      <div className="text-xs mt-2 text-yellow-300">
+        (2D Mode - WebGL Unavailable)
+      </div>
+    </div>
+  </div>
+);
+
+
 const NinetyHomepage = () => {
   const [visitorCount, setVisitorCount] = useState(12);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -22,6 +60,9 @@ const NinetyHomepage = () => {
   const [currentAnimation, setCurrentAnimation] = useState('dance');
   const [isControlsMinimized, setIsControlsMinimized] = useState(false);
   const audioRef = useRef(null);
+
+  const [showDebug, setShowDebug] = useState(false);
+
 
 
   const animations = [
@@ -71,7 +112,7 @@ const NinetyHomepage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black bg-[url('/api/placeholder/100/100')] bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5 mt-10">
+    <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5 mt-10">
 
       <div className="fixed top-4 right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden">
         {!isControlsMinimized ? (
@@ -191,13 +232,15 @@ const NinetyHomepage = () => {
           
           <div className="max-w-lg mx-auto bg-[#1a1a1a] border border-[#333] rounded-lg p-1 shadow-2xl">
             <div className="h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
-              <Avatar3D
-                key={currentAnimation}
-                modelPath={animations.find(a => a.id === currentAnimation)?.model}
-                enableControls={true}
-                autoRotate={true}
-                className="w-full h-full"
-              />
+              <Avatar3DErrorBoundary fallback={<Simple2DAvatar />}>
+                <Avatar3D
+                  key={currentAnimation}
+                  modelPath={animations.find(a => a.id === currentAnimation)?.model}
+                  enableControls={true}
+                  autoRotate={true}
+                  className="w-full h-full"
+                />
+              </Avatar3DErrorBoundary>
               
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 pointer-events-none"></div>
             </div>
@@ -223,7 +266,7 @@ const NinetyHomepage = () => {
           {[
             ['About Me', '/about', '👤'],
             ['My Cool Stuff', '/portfolio', '🎮'],
-            ['Sign My Guestbook!', '/guestbook', '📖']
+            ['Contact Me!', '#contact', '📧']
           ].map(([text, href, icon], i) => (
             <React.Fragment key={text}>
               <Link 
@@ -276,8 +319,6 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
               '🧮 Addicted to taking business problems and applying technical solutions',
               '✨ Obsessed with driving key metrics',
               '🔍 Observability enjoyer',
-              '🚴 Big cycling enthusiast',
-              '⚽ Loyal Arsenal fan',
             ].map((text, i) => (
               <p key={i} className="my-2">
                 <RainbowText>{text}</RainbowText>
@@ -289,11 +330,61 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
         <Divider />
 
 
-        <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-3 my-5">
-          <h2 className="text-2xl">
-            <RainbowText>📖 SIGN MY GUESTBOOK! 📖</RainbowText>
+        <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-5 my-5">
+          <h2 className="text-2xl mb-6">
+            <RainbowText>📧 CONTACT ME! 📧</RainbowText>
           </h2>
-          <p className="animate-[pulse_2s_infinite]">Be the first to sign!</p>
+          
+          <div className="max-w-md mx-auto space-y-4">
+            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
+              <a 
+                href="mailto:jake.milad@alumni.ubc.ca"
+                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
+              >
+                <span className="text-2xl animate-[bounce_2s_infinite]">📧</span>
+                <div className="text-center">
+                  <div className="text-lg font-bold">EMAIL</div>
+                  <div className="text-sm font-mono group-hover:underline">jake.milad@alumni.ubc.ca</div>
+                </div>
+              </a>
+            </div>
+
+            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
+              <a 
+                href="https://linkedin.com/in/jakemilad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
+              >
+                <span className="text-2xl animate-[bounce_2s_infinite]" style={{animationDelay: '0.5s'}}>💼</span>
+                <div className="text-center">
+                  <div className="text-lg font-bold">LINKEDIN</div>
+                  <div className="text-sm font-mono group-hover:underline">linkedin.com/in/jakemilad</div>
+                </div>
+              </a>
+            </div>
+
+            <div className="bg-[#000033] border-2 border-[#c0c0c0] border-outset p-4 hover:bg-[#000044] transition-colors">
+              <a 
+                href="https://github.com/jakemilad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 text-green-400 hover:text-yellow-300 no-underline group"
+              >
+                <span className="text-2xl animate-[bounce_2s_infinite]" style={{animationDelay: '1s'}}>👨‍💻</span>
+                <div className="text-center">
+                  <div className="text-lg font-bold">GITHUB</div>
+                  <div className="text-sm font-mono group-hover:underline">github.com/jakemilad</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-6 text-center">
+            <div className="text-yellow-300 text-sm animate-[blink_3s_infinite]">
+              💻 Click any link above to get in touch! 💻
+            </div>
+          </div>
         </div>
 
 
