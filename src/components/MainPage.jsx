@@ -52,13 +52,40 @@ const Simple2DAvatar = () => (
   </div>
 );
 
+const MusicAlert = ({ show, onClose }) => {
+  if (!show) return null;
+
+  return (
+    <div className="fixed top-20 right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
+      <div className="bg-[#000066] border-3 border-[#c0c0c0] border-ridge p-4 rounded shadow-xl max-w-xs">
+        <div className="text-center">
+          <div className="text-2xl mb-2 animate-[pulse_1s_infinite]">🎵</div>
+          <div className="text-yellow-300 font-bold text-sm mb-2">
+            MUSIC AVAILABLE
+          </div>
+          <div className="text-green-400 text-xs mb-3">
+            Click the volume button above to enjoy some tunes 🎶
+          </div>
+          <div className="flex items-center justify-center gap-1 text-white text-xs">
+            <span className="animate-[blink_1s_infinite]">♪</span>
+            <span>Auto-dismissing...</span>
+            <span className="animate-[blink_1s_infinite]">♪</span>
+          </div>
+        </div>
+        <div className="absolute -top-2 right-8 w-0 h-0 border-l-4 border-r-4 border-b-4 border-l-transparent border-r-transparent border-b-[#c0c0c0]"></div>
+      </div>
+    </div>
+  );
+};
+
 
 const NinetyHomepage = () => {
   const [visitorCount, setVisitorCount] = useState(12);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(null);
-  const [currentAnimation, setCurrentAnimation] = useState('dance');
+  const [currentAnimation, setCurrentAnimation] = useState('walk');
   const [isControlsMinimized, setIsControlsMinimized] = useState(false);
+  const [showMusicAlert, setShowMusicAlert] = useState(false);
   const audioRef = useRef(null);
 
   const [showDebug, setShowDebug] = useState(false);
@@ -66,9 +93,9 @@ const NinetyHomepage = () => {
 
 
   const animations = [
+    { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk-compressed.glb' },
     { id: 'dance', name: 'Dance', emoji: '🕺', model: '/models/dance-compressed.glb' },
     { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
-    { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk-compressed.glb' },
     { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run-compressed.glb' }
   ];
 
@@ -83,6 +110,35 @@ const NinetyHomepage = () => {
     
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const playAudio = async () => {
+      if (audioRef.current) {
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.log('Autoplay prevented:', error);
+          setIsPlaying(false);
+          setShowMusicAlert(true);
+        }
+      }
+    };
+
+    const timeoutId = setTimeout(playAudio, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  useEffect(() => {
+    if (showMusicAlert) {
+      const timeoutId = setTimeout(() => {
+        setShowMusicAlert(false);
+      }, 3000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showMusicAlert]);
 
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
@@ -113,7 +169,7 @@ const NinetyHomepage = () => {
 
   return (
     <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5 mt-10">
-
+      <MusicAlert show={showMusicAlert} onClose={() => setShowMusicAlert(false)} />
       <div className="fixed top-4 right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden">
         {!isControlsMinimized ? (
 
@@ -409,6 +465,17 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
+        }
+
+        @keyframes slideInRight {
+          from { 
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to { 
+            transform: translateX(0);
+            opacity: 1;
+          }
         }
       `}</style>
     </div>

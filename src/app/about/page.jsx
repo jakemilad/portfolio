@@ -37,13 +37,13 @@ const About = () => {
               </div>
             </div>
             <p className="mt-2 text-yellow-300 animate-[blink_1s_infinite]">
-              ⚡️ That's me! ⚡️
+              ⚡️ That's me ⚡️
             </p>
           </div>
 
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 text-left">
             <h2 className="text-2xl mb-4">
-              <RainbowText>👋 Hello World!</RainbowText>
+              <RainbowText>👋 Hello World</RainbowText>
             </h2>
             <div className="space-y-4 text-green-400">
               <p>As you can see, I'm absolutely cracked out of my mind at frontend developement. Famously invented centering divs.</p>
