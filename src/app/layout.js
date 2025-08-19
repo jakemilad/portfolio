@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import VintageCursor from "@/components/VintageCursor";
 
 export const metadata = {
   title: "Jake's Website",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased">
+        <VintageCursor />
         {children}
       </body>
     </html>
