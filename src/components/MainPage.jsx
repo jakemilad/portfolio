@@ -108,7 +108,7 @@ const NinetyHomepage = () => {
       setCurrentTime(new Date());
     }, 1000);
     
-    return () => clearInterval(timer);
+    return () => clearInterval(timer);ca
   }, []);
 
   useEffect(() => {
@@ -355,7 +355,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
             </div>
           </div>
           
-          <div className="max-w-lg mx-auto bg-[#1a1a1a] border border-[#333] rounded-lg p-1 shadow-2xl">
+          <div className="max-w-4xl mx-auto bg-[#1a1a1a] border border-[#333] rounded-lg p-1 shadow-2xl">
             <div className="h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
               <Avatar3DErrorBoundary fallback={<Simple2DAvatar />}>
                 <Avatar3D

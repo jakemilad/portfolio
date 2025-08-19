@@ -221,7 +221,7 @@ export default function Avatar3D({
         }}
       >
 
-        <PerspectiveCamera makeDefault position={[0, 0.5, 5]} />
+        <PerspectiveCamera makeDefault position={[0, 0.5, 6]} />
         
 
         <ambientLight intensity={0.6} />
