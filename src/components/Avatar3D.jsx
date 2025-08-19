@@ -12,7 +12,7 @@ function AvatarModel({ modelPath, ...props }) {
   const [clicked, setClicked] = useState(false);
   
 
-  const { scene, animations } = useGLTF(modelPath || '/models/walk-compressed.glb');
+  const { scene, animations } = useGLTF(modelPath || '/models/run-compressed.glb');
   
 
   const mixer = useRef();

@@ -83,7 +83,7 @@ const NinetyHomepage = () => {
   const [visitorCount, setVisitorCount] = useState(12);
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(null);
-  const [currentAnimation, setCurrentAnimation] = useState('walk');
+  const [currentAnimation, setCurrentAnimation] = useState('run');
   const [isControlsMinimized, setIsControlsMinimized] = useState(false);
   const [showMusicAlert, setShowMusicAlert] = useState(false);
   const audioRef = useRef(null);
@@ -93,10 +93,10 @@ const NinetyHomepage = () => {
 
 
   const animations = [
+    { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run-compressed.glb' },
     { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk-compressed.glb' },
     { id: 'dance', name: 'Dance', emoji: '🕺', model: '/models/dance-compressed.glb' },
     { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
-    { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run-compressed.glb' }
   ];
 
   const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
