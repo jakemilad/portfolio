@@ -96,7 +96,7 @@ const NinetyHomepage = () => {
     { id: 'run', name: 'Run', emoji: '🏃', model: '/models/run-compressed.glb' },
     { id: 'walk', name: 'Walk', emoji: '🚶', model: '/models/walk-compressed.glb' },
     { id: 'dance', name: 'Dance', emoji: '🕺', model: '/models/dance-compressed.glb' },
-    { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
+    // { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
   ];
 
   const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
@@ -331,7 +331,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           
           <div className="max-w-lg mx-auto mb-4">
             <div className="bg-[#000066] border-2 border-[#c0c0c0] border-groove p-2 rounded">
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 {animations.map((anim) => (
                   <button
                     key={anim.id}
