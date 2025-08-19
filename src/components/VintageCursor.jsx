@@ -8,7 +8,9 @@ const VintageCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseMove = useCallback((e) => {
-    setPosition({ x: e.clientX, y: e.clientY });
+    requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    });
   }, []);
 
   const handleMouseDown = useCallback(() => setIsClicking(true), []);
@@ -16,33 +18,40 @@ const VintageCursor = () => {
 
   const handleMouseOver = useCallback((e) => {
     const target = e.target;
-    if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('button')) {
-      setIsHovering(true);
-    } else {
-      setIsHovering(false);
-    }
+    const isInteractive = target.tagName === 'A' || 
+                          target.tagName === 'BUTTON' || 
+                          target.closest('button') ||
+                          target.closest('a');
+    setIsHovering(isInteractive);
   }, []);
 
   useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseover', handleMouseOver);
+    const options = { passive: true };
+    
+    document.addEventListener('mousemove', handleMouseMove, options);
+    document.addEventListener('mousedown', handleMouseDown, options);
+    document.addEventListener('mouseup', handleMouseUp, options);
+    document.addEventListener('mouseover', handleMouseOver, options);
     
     const style = document.createElement('style');
-    style.innerHTML = '* { cursor: none !important; }';
+    style.innerHTML = `
+      * { cursor: none !important; }
+      canvas { cursor: none !important; }
+      .avatar-container { cursor: none !important; }
+      .avatar-container * { cursor: none !important; }
+    `;
     document.head.appendChild(style);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mousemove', handleMouseMove, options);
+      document.removeEventListener('mousedown', handleMouseDown, options);
+      document.removeEventListener('mouseup', handleMouseUp, options);
+      document.removeEventListener('mouseover', handleMouseOver, options);
       style.remove();
     };
   }, [handleMouseMove, handleMouseDown, handleMouseUp, handleMouseOver]);
 
-  const createPixelatedCursor = () => {
+  const createPixelatedCursor = React.useMemo(() => {
     const scale = 2; 
     const pixels = [
       [1,0,0,0,0,0,0,0,0,0,0],
@@ -80,38 +89,43 @@ const VintageCursor = () => {
         style={{
           width: pixels[0].length * scale,
           height: pixels.length * scale,
+          willChange: 'transform', 
         }}
       >
         {pixels.map((row, rowIndex) =>
-          row.map((pixel, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              className="absolute"
-              style={{
-                left: colIndex * scale,
-                top: rowIndex * scale,
-                width: scale,
-                height: scale,
-                backgroundColor: getPixelColor(pixel),
-                imageRendering: 'pixelated',
-              }}
-            />
-          ))
+          row.map((pixel, colIndex) => 
+            pixel !== 0 ? (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className="absolute"
+                style={{
+                  left: colIndex * scale,
+                  top: rowIndex * scale,
+                  width: scale,
+                  height: scale,
+                  backgroundColor: getPixelColor(pixel),
+                  imageRendering: 'pixelated',
+                }}
+              />
+            ) : null
+          )
         )}
       </div>
     );
-  };
+  }, [isClicking, isHovering]);
 
   return (
     <div
-      className="fixed pointer-events-none z-[9999] transition-transform duration-100 ease-out"
+      className="fixed pointer-events-none z-[9999]"
       style={{
         left: position.x,
         top: position.y,
         transform: `scale(${isClicking ? 0.9 : isHovering ? 1.1 : 1})`,
+        willChange: 'transform',
+        transition: 'transform 100ms ease-out',
       }}
     >
-      {createPixelatedCursor()}
+      {createPixelatedCursor}
     </div>
   );
 };
