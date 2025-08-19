@@ -251,6 +251,75 @@ const NinetyHomepage = () => {
           ))}
         </div>
 
+        <Divider />
+
+
+        <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-3 my-5">
+          {[
+            ['About Me', '/about', '👤'],
+            ['My Projects', '/portfolio', '🎮'],
+            ['Contact Me!', '#contact', '📧']
+          ].map(([text, href, icon], i) => (
+            <React.Fragment key={text}>
+              <Link 
+                href={href}
+                className="text-xl text-green-400 no-underline mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
+              >
+                <span className="animate-[pulse_2s_infinite]">{icon}</span>
+                <RainbowText>{text}</RainbowText>
+              </Link>
+              <span className="inline-block animate-[spin_3s_linear_infinite]">💫</span>
+            </React.Fragment>
+          ))}
+        </nav>
+
+        <Divider />
+
+
+        <div className="overflow-hidden whitespace-nowrap my-4">
+        <div className="animate-[marquee_20s_linear_infinite]">
+        <pre className="font-mono text-yellow-300 text-xs inline-block">
+        {`
+          JJJJJJJJJJJ          AAA               KKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLL                            AAA               DDDDDDDDDDDDD        
+          J:::::::::J         A:::A              K:::::::K    K:::::KE::::::::::::::::::::E     M:::::::M             M:::::::MI::::::::IL:::::::::L                           A:::A              D::::::::::::DDD     
+          J:::::::::J        A:::::A             K:::::::K    K:::::KE::::::::::::::::::::E     M::::::::M           M::::::::MI::::::::IL:::::::::L                          A:::::A             D:::::::::::::::DD   
+          JJ:::::::JJ       A:::::::A            K:::::::K   K::::::KEE::::::EEEEEEEEE::::E     M:::::::::M         M:::::::::MII::::::IILL:::::::LL                         A:::::::A            DDD:::::DDDDD:::::D  
+            J:::::J        A:::::::::A           KK::::::K  K:::::KKK  E:::::E       EEEEEE     M::::::::::M       M::::::::::M  I::::I    L:::::L                          A:::::::::A             D:::::D    D:::::D 
+            J:::::J       A:::::A:::::A            K:::::K K:::::K     E:::::E                  M:::::::::::M     M:::::::::::M  I::::I    L:::::L                         A:::::A:::::A            D:::::D     D:::::D
+            J:::::J      A:::::A A:::::A           K::::::K:::::K      E::::::EEEEEEEEEE        M:::::::M::::M   M::::M:::::::M  I::::I    L:::::L                        A:::::A A:::::A           D:::::D     D:::::D
+            J:::::j     A:::::A   A:::::A          K:::::::::::K       E:::::::::::::::E        M::::::M M::::M M::::M M::::::M  I::::I    L:::::L                       A:::::A   A:::::A          D:::::D     D:::::D
+            J:::::J    A:::::A     A:::::A         K:::::::::::K       E:::::::::::::::E        M::::::M  M::::M::::M  M::::::M  I::::I    L:::::L                      A:::::A     A:::::A         D:::::D     D:::::D
+JJJJJJJ     J:::::J   A:::::AAAAAAAAA:::::A        K::::::K:::::K      E::::::EEEEEEEEEE        M::::::M   M:::::::M   M::::::M  I::::I    L:::::L                     A:::::AAAAAAAAA:::::A        D:::::D     D:::::D
+J:::::J     J:::::J  A:::::::::::::::::::::A       K:::::K K:::::K     E:::::E                  M::::::M    M:::::M    M::::::M  I::::I    L:::::L                    A:::::::::::::::::::::A       D:::::D     D:::::D
+J::::::J   J::::::J A:::::AAAAAAAAAAAAA:::::A    KK::::::K  K:::::KKK  E:::::E       EEEEEE     M::::::M     MMMMM     M::::::M  I::::I    L:::::L         LLLLLL    A:::::AAAAAAAAAAAAA:::::A      D:::::D    D:::::D 
+J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEEEEEEE:::::E     M::::::M               M::::::MII::::::IILL:::::::LLLLLLLLL:::::L   A:::::A             A:::::A   DDD:::::DDDDD:::::D  
+ JJ:::::::::::::JJA:::::A               A:::::A  K:::::::K    K:::::KE::::::::::::::::::::E     M::::::M               M::::::MI::::::::IL::::::::::::::::::::::L  A:::::A               A:::::A  D:::::::::::::::DD   
+   JJ:::::::::JJ A:::::A                 A:::::A K:::::::K    K:::::KE::::::::::::::::::::E     M::::::M               M::::::MI::::::::IL::::::::::::::::::::::L A:::::A                 A:::::A D::::::::::::DDD     
+     JJJJJJJJJ  AAAAAAA                   AAAAAAAKKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLLLLLLLLLLLLLLLAAAAAAA                   AAAAAAADDDDDDDDDDDDD        
+          `}
+            </pre>
+            </div>
+        </div>
+
+
+        <div className="h-48 my-5 overflow-hidden bg-[#000066] border-[3px] border-[#c0c0c0] border-inset">
+          <div className="animate-[scrollUp_15s_linear_infinite]">
+            {[
+              '🎓 UBC Business & Computer Science Degree',
+              '👨‍💻 2+ years of Software Engineering Experience',
+              '🔧 Site reliability engineering at lululemon',
+              '🧮 Addicted to taking business problems and applying technical solutions',
+              '✨ Obsessed with driving key metrics',
+              '🔍 Observability enjoyer',
+            ].map((text, i) => (
+              <p key={i} className="my-2">
+                <RainbowText>{text}</RainbowText>
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <Divider />
 
         <div className="my-6">
           <div className="text-center mb-3">
@@ -314,76 +383,6 @@ const NinetyHomepage = () => {
             </p>
           </div>
         </div>
-
-        <Divider />
-
-
-        <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-3 my-5">
-          {[
-            ['About Me', '/about', '👤'],
-            ['My Cool Stuff', '/portfolio', '🎮'],
-            ['Contact Me!', '#contact', '📧']
-          ].map(([text, href, icon], i) => (
-            <React.Fragment key={text}>
-              <Link 
-                href={href}
-                className="text-xl text-green-400 no-underline mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
-              >
-                <span className="animate-[pulse_2s_infinite]">{icon}</span>
-                <RainbowText>{text}</RainbowText>
-              </Link>
-              <span className="inline-block animate-[spin_3s_linear_infinite]">💫</span>
-            </React.Fragment>
-          ))}
-        </nav>
-
-        <Divider />
-
-
-        <div className="overflow-hidden whitespace-nowrap my-4">
-        <div className="animate-[marquee_20s_linear_infinite]">
-        <pre className="font-mono text-yellow-300 text-xs inline-block">
-        {`
-          JJJJJJJJJJJ          AAA               KKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLL                            AAA               DDDDDDDDDDDDD        
-          J:::::::::J         A:::A              K:::::::K    K:::::KE::::::::::::::::::::E     M:::::::M             M:::::::MI::::::::IL:::::::::L                           A:::A              D::::::::::::DDD     
-          J:::::::::J        A:::::A             K:::::::K    K:::::KE::::::::::::::::::::E     M::::::::M           M::::::::MI::::::::IL:::::::::L                          A:::::A             D:::::::::::::::DD   
-          JJ:::::::JJ       A:::::::A            K:::::::K   K::::::KEE::::::EEEEEEEEE::::E     M:::::::::M         M:::::::::MII::::::IILL:::::::LL                         A:::::::A            DDD:::::DDDDD:::::D  
-            J:::::J        A:::::::::A           KK::::::K  K:::::KKK  E:::::E       EEEEEE     M::::::::::M       M::::::::::M  I::::I    L:::::L                          A:::::::::A             D:::::D    D:::::D 
-            J:::::J       A:::::A:::::A            K:::::K K:::::K     E:::::E                  M:::::::::::M     M:::::::::::M  I::::I    L:::::L                         A:::::A:::::A            D:::::D     D:::::D
-            J:::::J      A:::::A A:::::A           K::::::K:::::K      E::::::EEEEEEEEEE        M:::::::M::::M   M::::M:::::::M  I::::I    L:::::L                        A:::::A A:::::A           D:::::D     D:::::D
-            J:::::j     A:::::A   A:::::A          K:::::::::::K       E:::::::::::::::E        M::::::M M::::M M::::M M::::::M  I::::I    L:::::L                       A:::::A   A:::::A          D:::::D     D:::::D
-            J:::::J    A:::::A     A:::::A         K:::::::::::K       E:::::::::::::::E        M::::::M  M::::M::::M  M::::::M  I::::I    L:::::L                      A:::::A     A:::::A         D:::::D     D:::::D
-JJJJJJJ     J:::::J   A:::::AAAAAAAAA:::::A        K::::::K:::::K      E::::::EEEEEEEEEE        M::::::M   M:::::::M   M::::::M  I::::I    L:::::L                     A:::::AAAAAAAAA:::::A        D:::::D     D:::::D
-J:::::J     J:::::J  A:::::::::::::::::::::A       K:::::K K:::::K     E:::::E                  M::::::M    M:::::M    M::::::M  I::::I    L:::::L                    A:::::::::::::::::::::A       D:::::D     D:::::D
-J::::::J   J::::::J A:::::AAAAAAAAAAAAA:::::A    KK::::::K  K:::::KKK  E:::::E       EEEEEE     M::::::M     MMMMM     M::::::M  I::::I    L:::::L         LLLLLL    A:::::AAAAAAAAAAAAA:::::A      D:::::D    D:::::D 
-J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEEEEEEE:::::E     M::::::M               M::::::MII::::::IILL:::::::LLLLLLLLL:::::L   A:::::A             A:::::A   DDD:::::DDDDD:::::D  
- JJ:::::::::::::JJA:::::A               A:::::A  K:::::::K    K:::::KE::::::::::::::::::::E     M::::::M               M::::::MI::::::::IL::::::::::::::::::::::L  A:::::A               A:::::A  D:::::::::::::::DD   
-   JJ:::::::::JJ A:::::A                 A:::::A K:::::::K    K:::::KE::::::::::::::::::::E     M::::::M               M::::::MI::::::::IL::::::::::::::::::::::L A:::::A                 A:::::A D::::::::::::DDD     
-     JJJJJJJJJ  AAAAAAA                   AAAAAAAKKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLLLLLLLLLLLLLLLAAAAAAA                   AAAAAAADDDDDDDDDDDDD        
-          `}
-            </pre>
-            </div>
-        </div>
-
-
-        <div className="h-48 my-5 overflow-hidden bg-[#000066] border-[3px] border-[#c0c0c0] border-inset">
-          <div className="animate-[scrollUp_15s_linear_infinite]">
-            {[
-              '🎓 UBC Business & Computer Science Degree',
-              '👨‍💻 2+ years of Software Engineering Experience',
-              '🔧 Site reliability engineering at lululemon',
-              '🧮 Addicted to taking business problems and applying technical solutions',
-              '✨ Obsessed with driving key metrics',
-              '🔍 Observability enjoyer',
-            ].map((text, i) => (
-              <p key={i} className="my-2">
-                <RainbowText>{text}</RainbowText>
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <Divider />
 
 
         <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-5 my-5">
