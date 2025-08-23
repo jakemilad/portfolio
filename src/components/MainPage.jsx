@@ -236,10 +236,10 @@ const NinetyHomepage = () => {
           </div>
         </div>
 
-        <Divider />
+        {/* <Divider /> */}
 
 
-        <div className="flex justify-center gap-4 my-4">
+        {/* <div className="flex justify-center gap-4 my-4">
           {emojis.map((emoji, i) => (
             <span
               key={i}
@@ -249,9 +249,9 @@ const NinetyHomepage = () => {
               {emoji}
             </span>
           ))}
-        </div>
+        </div> */}
 
-        <Divider />
+        {/* <Divider /> */}
 
 
         <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-3 my-5">
@@ -273,7 +273,7 @@ const NinetyHomepage = () => {
           ))}
         </nav>
 
-        <Divider />
+        {/* <Divider /> */}
 
 
         <div className="overflow-hidden whitespace-nowrap my-4">
@@ -319,7 +319,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           </div>
         </div>
 
-        <Divider />
+        {/* <Divider /> */}
 
         <div className="my-6">
           <div className="text-center mb-3">

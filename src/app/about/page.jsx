@@ -3,6 +3,20 @@ import React from 'react';
 import { Music, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+
+
+const aboutMeSection = () => {
+  return (
+    <div className="text-left text-sm">
+      <p>I like building things that make things easier.</p>
+      <br />
+      <p>At lululemon, I founded an executive-level tool that consolidates critical system health into a single pane of glass. That gave leadership and engineering teams a high level view into how well we’re selling yoga pants and also figure out if we got an issue selling yoga pants. I’ve worked across the stack to bring it to life, from backend data pipelines to process  hundreds and thousands of metrics, responsive frontend dashboards with sub-second latency and multi-layer caching architecture. I also work pretty closely with other teams to improve their metrics, logs, tracing, and strategizing solutions to improve their observability. I do big picture stuff too like building out the enterprise reliability standards across the org,  developing Service Level Objectives for all critical commerce services in production.</p>
+      <br />
+      <p>Outside of work, I like to build stuff that I can use and that push my technical curiosity. Also so that I’m still good at programming. I built an LLM powered financial transaction tool that helps categorize, summarize and provide insights into my plain and boring statement data from the bank. I’ve designed dynamic data ingestion solutions to adapt to different schemas from different banks, all beautifully visualized with cool charts. I also love to get into systems level stuff - I built a minimal container runtime in Go where I used Linux namespaces and kernel primitives.</p>
+    </div>
+  )
+}
+
 const About = () => {
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
@@ -27,7 +41,6 @@ const About = () => {
           About Me
         </RainbowText>
 
-        <Divider />
 
         <div className="grid md:grid-cols-2 gap-8 my-8">
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4">
@@ -43,15 +56,14 @@ const About = () => {
 
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 text-left">
             <h2 className="text-2xl mb-4">
-              <RainbowText>👋 Hello World</RainbowText>
+              <RainbowText>👋 Hello, I'm Jake</RainbowText>
             </h2>
             <div className="space-y-4 text-green-400">
-              <p>As you can see, I'm absolutely cracked out of my mind at frontend developement. Famously invented centering divs.</p>
+              {aboutMeSection()}
             </div>
           </div>
         </div>
 
-        <Divider />
 
         <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 my-8">
           <h2 className="text-2xl mb-4">
@@ -68,7 +80,7 @@ const About = () => {
             ))}
           </div>
         </div>
-
+        <Divider />
         <Link
           href="/"
           className="inline-block bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-3 hover:text-yellow-300"
