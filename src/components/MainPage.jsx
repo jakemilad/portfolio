@@ -359,7 +359,6 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
             <div className="h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
               <Avatar3DErrorBoundary fallback={<Simple2DAvatar />}>
                 <Avatar3D
-                  key={currentAnimation}
                   modelPath={animations.find(a => a.id === currentAnimation)?.model}
                   enableControls={true}
                   autoRotate={true}
