@@ -1,46 +1,54 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, useGLTF, Text, Float } from '@react-three/drei';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, useGLTF, Text, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 
 function AvatarModel({ modelPath, ...props }) {
   const meshRef = useRef();
-  const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
-  
 
+  // Load model
   const { scene, animations } = useGLTF(modelPath || '/models/run-compressed.glb');
-  
 
   const mixer = useRef();
-  
+  const targetScale = useRef(2);
+
   useEffect(() => {
+    if (mixer.current) {
+      mixer.current.stopAllAction();
+    }
+
     if (animations && animations.length > 0) {
       mixer.current = new THREE.AnimationMixer(scene);
       const action = mixer.current.clipAction(animations[0]);
       action.play();
     }
+
+    return () => {
+      if (mixer.current) {
+        mixer.current.stopAllAction();
+      }
+    };
   }, [scene, animations]);
 
+  useEffect(() => {
+    targetScale.current = clicked ? 2.2 : 2;
+  }, [clicked]);
 
   useFrame((state, delta) => {
     if (mixer.current) {
       mixer.current.update(delta);
     }
-    
 
     if (meshRef.current) {
-      meshRef.current.rotation.y += hovered ? 0.01 : 0.005;
-      
+      meshRef.current.position.y = -1.2 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
-      meshRef.current.position.y = -1.2 + Math.sin(state.clock.elapsedTime) * 0.1;
-      
-
-      const targetScale = clicked ? 2.2 : 2;
-      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      const currentScale = meshRef.current.scale.x;
+      const newScale = THREE.MathUtils.lerp(currentScale, targetScale.current, 0.05);
+      meshRef.current.scale.setScalar(newScale);
     }
   });
 
@@ -48,11 +56,9 @@ function AvatarModel({ modelPath, ...props }) {
     <primitive
       ref={meshRef}
       object={scene}
-      scale={clicked ? 2.4 : 2}
+      scale={2}
       position={[0, -5, 0]}
       onClick={() => setClicked(!clicked)}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
       {...props}
     />
   );
@@ -83,12 +89,12 @@ function PlaceholderAvatar(props) {
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial color={hovered ? "#ff6b6b" : "#4ecdc4"} />
       </mesh>
-      
+
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.3, 0.4, 1, 8]} />
         <meshStandardMaterial color="#95e1d3" />
       </mesh>
-      
+
       <mesh position={[-0.6, 0.3, 0]} rotation={[0, 0, Math.PI / 6]}>
         <cylinderGeometry args={[0.1, 0.1, 0.8, 8]} />
         <meshStandardMaterial color="#fce38a" />
@@ -97,7 +103,7 @@ function PlaceholderAvatar(props) {
         <cylinderGeometry args={[0.1, 0.1, 0.8, 8]} />
         <meshStandardMaterial color="#fce38a" />
       </mesh>
-      
+
       <mesh position={[-0.2, 1.1, 0.4]}>
         <sphereGeometry args={[0.05, 8, 8]} />
         <meshStandardMaterial color="black" />
@@ -106,7 +112,7 @@ function PlaceholderAvatar(props) {
         <sphereGeometry args={[0.05, 8, 8]} />
         <meshStandardMaterial color="black" />
       </mesh>
-      
+
       {clicked && (
         <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
           <Text
@@ -140,12 +146,12 @@ function detectWebGLSupport() {
 function FallbackAvatar({ className = "" }) {
   const [currentEmoji, setCurrentEmoji] = useState('🤖');
   const emojis = ['🤖', '👨‍💻', '🧑‍💻', '💻', '🎮', '🚀'];
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
     }, 2000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -165,9 +171,9 @@ function FallbackAvatar({ className = "" }) {
   );
 }
 
-export default function Avatar3D({ 
-  modelPath, 
-  enableControls = true, 
+export default function Avatar3D({
+  modelPath,
+  enableControls = true,
   autoRotate = true,
   className = "",
   style = {}
@@ -183,17 +189,15 @@ export default function Avatar3D({
     }
   }, []);
 
-  // Error boundary for Canvas
   const handleCanvasError = (error) => {
     console.warn('Canvas/WebGL Error:', error);
     setWebglError(error);
     setWebglSupported(false);
   };
 
-  // If WebGL isn't supported or failed, show fallback
   if (!webglSupported || webglError) {
     return (
-      <div 
+      <div
         className={`w-full h-full ${className}`}
         style={{ minHeight: '400px', ...style }}
       >
@@ -203,57 +207,60 @@ export default function Avatar3D({
   }
 
   return (
-    <div 
+    <div
       className={`w-full h-full ${className}`}
       style={{ minHeight: '400px', ...style }}
     >
-      <Canvas 
+      <Canvas
         onError={handleCanvasError}
         onCreated={({ gl }) => {
-          gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          gl.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
           gl.outputColorSpace = THREE.SRGBColorSpace;
         }}
         gl={{
           alpha: true,
           antialias: false,
-          powerPreference: "default",
+          powerPreference: "high-performance",
           failIfMajorPerformanceCaveat: false
         }}
       >
 
-        <PerspectiveCamera makeDefault position={[0, 0.5, 6]} />
-        
+        <PerspectiveCamera makeDefault position={[0, 0.5, 6]} fov={50} />
+
 
         <ambientLight intensity={0.6} />
-        <directionalLight 
-          position={[5, 5, 5]} 
+        <directionalLight
+          position={[5, 5, 5]}
           intensity={0.8}
+          castShadow={false}
         />
-        
+
 
         {modelPath && !modelError ? (
-          <AvatarModel 
+          <AvatarModel
             modelPath={modelPath}
             onError={() => setModelError(true)}
           />
         ) : (
           <PlaceholderAvatar />
         )}
-        
+
 
         {enableControls && (
-          <OrbitControls 
+          <OrbitControls
             enablePan={false}
             enableZoom={true}
             enableRotate={true}
             autoRotate={autoRotate}
-            autoRotateSpeed={1}
+            autoRotateSpeed={0.5}
             minDistance={2}
             maxDistance={8}
             minPolarAngle={Math.PI / 6}
             maxPolarAngle={Math.PI - Math.PI / 6}
             enableDamping={true}
             dampingFactor={0.05}
+            rotateSpeed={0.5}
+            zoomSpeed={0.5}
           />
         )}
       </Canvas>
