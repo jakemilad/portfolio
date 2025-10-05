@@ -8,9 +8,7 @@ const VintageCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseMove = useCallback((e) => {
-    requestAnimationFrame(() => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    });
+    setPosition({ x: e.clientX, y: e.clientY });
   }, []);
 
   const handleMouseDown = useCallback(() => setIsClicking(true), []);

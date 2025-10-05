@@ -17,13 +17,64 @@ const aboutMeSection = () => {
   )
 }
 
+const SkillSection = ({skills, title}) => {
+  return (
+    <div className='p-2'>
+      <h2 className='text-2xl text-left'>{title}</h2>
+      <div className='grid grid-cols-3 md:grid-cols-4 gap-2'>
+        {skills.map((lang, i) => (
+          <div
+            key={i}
+            className='bg-black p-3 border border-[#808080] border-inset'
+          >
+            <span className="animate-[pulse_2s_infinite]">💫</span> {lang} <span className="animate-[pulse_2s_infinite]">💫</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// function skillSection({skills, title}) {
+//   return (
+//   <div className='p-2'>
+//     <h1 className='text-2xl text-left'>{title}</h1>
+//     <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+//       {skills.map((lang, i) => (
+//         <div
+//           key={i}
+//           className='bg-black p-2 border border-[#808080] border-inset'
+//         >
+//           <span className="animate-[pulse_2s_infinite] p-2">💫</span>{lang}
+//         </div>
+//       ))}
+//   </div>
+//   </div>
+//   )
+// }
+
 const About = () => {
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
       {children}
     </span>
   );
+  const languages = ['Python',' TypeScript', 'JavaScript', 'Go', 'Java', 'SQL', 'HTML', 'CSS']
+  const data = ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'PostgreSQL', 'MongoDB', 'Snowflake', 'Redis']
+  const frameworks = ['Node.js', 'Django', 'Next.js', 'React', 'Pandas', 'NumPy', 'Jest', 'Flask', 'GraphQL', 'PostCSS', 'TailwindCSS']
+  const tools = ['Git', 'Datadog', 'Splunk', 'OpenTelemetry', 'Grafana', 'Prometheus', 'Loki', 'ArgoCD', 'GitLabCI', 'TravisCI']
 
+  const skillsSectionArray = [
+    {title: "Languages", skills: languages},
+    {title: "Data & Infrastructure", skills: data},
+    {title: "Frameworks & Libraries", skills: frameworks},
+    {title: "Tools & DevOps", skills: tools},
+  ]
+  // const technologies = ['React', 'Next.js', 'Tailwind', 'Python', 'Datadog', 'Splunk', 'Kubernetes', 'Docker', 'Terraform', 'Git', 'CI/CD', 'Observability', 'AWS']
+    //   Languages: Python, TypeScript/JavaScript, Go, Java, SQL, R, HTML, CSS
+    // Data & Infrastructure: AWS, Docker, Kubernetes, Terraform, PostgreSQL, MongoDB, Snowflake, Redis
+    // Frameworks & Libraries: Node.js, Django, Next.js, React, Pandas, NumPy, Jest, Flask, GraphQL, PostCSS, TailwindCSS
+    // Tools & DevOps: Git, Datadog, Splunk, OpenTelemetry, Grafana, Prometheus, Loki, ArgoCD, GitLabCI, TravisCI
   const Divider = () => (
     <div className="flex items-center justify-center my-4">
       {[...Array(5)].map((_, i) => (
@@ -69,16 +120,10 @@ const About = () => {
           <h2 className="text-2xl mb-4">
             <RainbowText>🚀 Super Cool Skills 🚀</RainbowText>
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {['React', 'Next.js', 'Tailwind', 'Python', 'Datadog', 'Splunk', 'Kubernetes', 'Docker', 'Terraform', 'Git', 'CI/CD', 'Observability', 'AWS'].map((skill, i) => (
-              <div
-                key={i}
-                className="bg-black p-2 border-2 border-[#808080] border-inset"
-              >
-                <span className="animate-[pulse_2s_infinite]">💫</span> {skill}
-              </div>
-            ))}
-          </div>
+
+          {skillsSectionArray.map((s) => {
+            return <SkillSection skills={s.skills} title={s.title} />
+          })}
         </div>
         <Divider />
         <Link
