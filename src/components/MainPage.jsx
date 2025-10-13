@@ -80,7 +80,7 @@ const MusicAlert = ({ show, onClose }) => {
 
 
 const NinetyHomepage = () => {
-  const [visitorCount, setVisitorCount] = useState(12);
+  const [visitorCount, setVisitorCount] = useState(13492);
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(null);
   const [currentAnimation, setCurrentAnimation] = useState('run');
@@ -232,7 +232,7 @@ const NinetyHomepage = () => {
 
         <div className="my-5 text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
           <div className="animate-[marquee_10s_linear_infinite]">
-            🚧 WOAH HOLD UP 🚧 SOFTWARE ENGINEER HERE 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧
+            🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧
           </div>
         </div>
 
@@ -319,7 +319,6 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           </div>
         </div>
 
-        {/* <Divider /> */}
 
         <div className="my-6">
           <div className="text-center mb-3">
@@ -386,7 +385,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
         <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-5 my-5">
           <h2 className="text-2xl mb-6">
-            <RainbowText>📧 CONTACT ME! 📧</RainbowText>
+            <RainbowText>📧 CONTACT ME 📧</RainbowText>
           </h2>
           
           <div className="max-w-md mx-auto space-y-4">
@@ -397,7 +396,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
           <div className="mt-6 text-center">
             <div className="text-yellow-300 text-sm animate-[blink_3s_infinite]">
-              💻 Click any link above to get in touch! 💻
+              💻 Click any link above to get in touch 💻
             </div>
           </div>
         </div>
@@ -413,7 +412,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
         <div className="overflow-hidden whitespace-nowrap my-5">
           <div className="animate-[marquee_15s_linear_infinite]">
-            ⭐️ Best viewed at 800x600 resolution ⭐️ Sound ON! ⭐️
+            ⭐️ This Counter Doesn't work ⭐️ It's HardCoded ⭐️
           </div>
         </div>
 
