@@ -412,7 +412,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
         <div className="overflow-hidden whitespace-nowrap my-5">
           <div className="animate-[marquee_15s_linear_infinite]">
-            ⭐️ This Counter Doesn't work ⭐️ It's HardCoded ⭐️
+            ⭐️ This Counter Doesn't work ⭐️ It's Hardcoded ⭐️ Or is it.. ⭐️
           </div>
         </div>
 
