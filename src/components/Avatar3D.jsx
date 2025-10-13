@@ -122,7 +122,7 @@ function PlaceholderAvatar(props) {
             anchorX="center"
             anchorY="middle"
           >
-            Hey there! 👋
+            Hey there! 
           </Text>
         </Float>
       )}
