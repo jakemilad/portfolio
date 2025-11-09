@@ -1,25 +1,40 @@
 'use client';
 import React from 'react';
-import { Music, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 
 const aboutMeSection = () => {
   return (
-    <div className="text-left text-sm">
-      <p>I like building things that make things easier.</p>
-      <br />
-      <p>At lululemon, I founded an executive-level tool that consolidates critical system health into a single pane of glass. That gave leadership and engineering teams a high level view into how well we’re selling yoga pants and also figure out if we got an issue selling yoga pants. I’ve worked across the stack to bring it to life, from backend data pipelines to process  hundreds and thousands of metrics, responsive frontend dashboards with sub-second latency and multi-layer caching architecture. I also work pretty closely with other teams to improve their metrics, logs, tracing, and strategizing solutions to improve their observability. I do big picture stuff too like building out the enterprise reliability standards across the org,  developing Service Level Objectives for all critical commerce services in production.</p>
-      <br />
-      <p>Outside of work, I like to build stuff that I can use and that push my technical curiosity. Also so that I’m still good at programming. I built an LLM powered financial transaction tool that helps categorize, summarize and provide insights into my plain and boring statement data from the bank. I’ve designed dynamic data ingestion solutions to adapt to different schemas from different banks, all beautifully visualized with cool charts. I also love to get into systems level stuff - I built a minimal container runtime in Go where I used Linux namespaces and kernel primitives.</p>
+    <div className="text-left text-sm space-y-5">
+
+      <div className='bg-[#000066] border-[3px] border-[#c0c0c0] border-inset p-3'>
+        <h3 className='text-xl mb-2 text-yellow-300'>Education</h3>
+        <p>Studied Business + Computer Science at UBC.</p>
+      </div>
+
+      <div className='bg-[#000066] border-[3px] border-[#c0c0c0] border-inset p-3'>
+        <h3 className='text-xl mb-2 text-yellow-300'>lululemon</h3>
+        <ul className='list-disc ml-5 space-y-2'>
+          <li>Main builder behind SweatCheck, an internal observability platform. It unifies telemetry from 300+ services into one dashboard to spot issues fast (especially on Black Friday).</li>
+          <li>Built end to end with Next.js, TypeScript, Redis, Datadog, and Snowflake. Three-tier caching + parallel pipelines cut API load ~90% while keeping data fresh every 45 seconds.</li>
+          <li>Introduced SLOs for checkout (cart, shipping, payment, order) targeting 99.95% availability, and automated Datadog setup with a Python CLI for 40+ GraphQL resolvers — reducing detection time ~30%.</li>
+        </ul>
+      </div>
+
+      <div className='bg-[#000066] border-[3px] border-[#c0c0c0] border-inset p-3'>
+        <h3 className='text-xl mb-2 text-yellow-300'>Side Projects</h3>
+        <p>
+          I build tools I actually use: an LLM-powered personal finance analyzer with flexible ingestion and crisp charts; and a tiny container runtime in Go using Linux namespaces and kernel primitives.
+        </p>
+      </div>
     </div>
   )
 }
 
-const SkillSection = ({skills, title}) => {
+const SkillSection = ({skills, title, id}) => {
   return (
-    <div className='p-2'>
+    <div key={id} className='p-2'>
       <h2 className='text-2xl text-left'>{title}</h2>
       <div className='grid grid-cols-3 md:grid-cols-4 gap-2'>
         {skills.map((lang, i) => (
@@ -65,10 +80,10 @@ const About = () => {
   const tools = ['Git', 'Datadog', 'Splunk', 'OpenTelemetry', 'Grafana', 'Prometheus', 'Loki', 'ArgoCD', 'GitLabCI', 'TravisCI']
 
   const skillsSectionArray = [
-    {title: "Languages", skills: languages},
-    {title: "Data & Infrastructure", skills: data},
-    {title: "Frameworks & Libraries", skills: frameworks},
-    {title: "Tools & DevOps", skills: tools},
+    {title: "Languages", skills: languages, id: "languages"},
+    {title: "Data & Infrastructure", skills: data, id: "data"},
+    {title: "Frameworks & Libraries", skills: frameworks, id: "frameworks"},
+    {title: "Tools & DevOps", skills: tools, id: "tools"},
   ]
   // const technologies = ['React', 'Next.js', 'Tailwind', 'Python', 'Datadog', 'Splunk', 'Kubernetes', 'Docker', 'Terraform', 'Git', 'CI/CD', 'Observability', 'AWS']
     //   Languages: Python, TypeScript/JavaScript, Go, Java, SQL, R, HTML, CSS
@@ -101,13 +116,13 @@ const About = () => {
               </div>
             </div>
             <p className="mt-2 text-yellow-300 animate-[blink_1s_infinite]">
-              ⚡️ That's me ⚡️
+              That's me
             </p>
           </div>
 
           <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 text-left">
             <h2 className="text-2xl mb-4">
-              <RainbowText>👋 Hello, I'm Jake</RainbowText>
+              <RainbowText>Hello, I'm Jake</RainbowText>
             </h2>
             <div className="space-y-4 text-green-400">
               {aboutMeSection()}
@@ -116,15 +131,34 @@ const About = () => {
         </div>
 
 
-        <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 my-8">
+        {/* <div className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-4 my-8">
           <h2 className="text-2xl mb-4">
             <RainbowText>🚀 Super Cool Skills 🚀</RainbowText>
           </h2>
 
           {skillsSectionArray.map((s) => {
-            return <SkillSection skills={s.skills} title={s.title} />
+            return <SkillSection key={s.id} skills={s.skills} title={s.title} />
           })}
-        </div>
+        </div> */}
+
+        {/* <div className="h-48 my-5 overflow-hidden bg-[#000066] border-[3px] border-[#c0c0c0] border-inset">
+          <div className="animate-[scrollUp_15s_linear_infinite]">
+            {[
+              '🎓 UBC Business & Computer Science Degree',
+              '👨‍💻 2+ years of Software Engineering Experience',
+              '🔧 Site reliability engineering at lululemon',
+              '🧮 Addicted to taking business problems and applying technical solutions',
+              '✨ Obsessed with driving key metrics',
+              '🔍 Observability enjoyer',
+            ].map((text, i) => (
+              <p key={i} className="my-2">
+                <RainbowText>{text}</RainbowText>
+              </p>
+            ))}
+          </div>
+        </div> */}
+
+
         <Divider />
         <Link
           href="/"

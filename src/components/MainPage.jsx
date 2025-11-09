@@ -99,7 +99,7 @@ const NinetyHomepage = () => {
     // { id: 'agree', name: 'Agree', emoji: '👍', model: '/models/agree-compressed.glb' },
   ];
 
-  const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
+  // const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
 
   useEffect(() => {
     setCurrentTime(new Date());
@@ -256,7 +256,7 @@ const NinetyHomepage = () => {
 
         <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-3 my-5">
           {[
-            ['About Me', '/about', '👤'],
+            // ['About Me', '/about', '👤'],
             ['My Projects', '/portfolio', '🎮'],
             ['Contact Me!', '#contact', '📧']
           ].map(([text, href, icon], i) => (
@@ -302,7 +302,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
         </div>
 
 
-        <div className="h-48 my-5 overflow-hidden bg-[#000066] border-[3px] border-[#c0c0c0] border-inset">
+        {/* <div className="h-48 my-5 overflow-hidden bg-[#000066] border-[3px] border-[#c0c0c0] border-inset">
           <div className="animate-[scrollUp_15s_linear_infinite]">
             {[
               '🎓 UBC Business & Computer Science Degree',
@@ -317,7 +317,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
               </p>
             ))}
           </div>
-        </div>
+        </div> */}
 
 
         <div className="my-6">

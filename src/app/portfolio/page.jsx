@@ -53,7 +53,7 @@ const Portfolio = () => {
         <div className="text-center mb-8">
           <div className="overflow-hidden whitespace-nowrap">
             <div className="animate-[marquee_12s_linear_infinite] text-yellow-300 text-sm">
-              💻 Projects that I think our cool 💻 Built by a guy who loves primary colors 💻
+              Projects that I think are cool, built by a guy who loves primary colors
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const Portfolio = () => {
         <div className="mt-10 text-center">
           <div className="mb-6">
             <p className="text-green-400 text-sm">
-              Always cooking up something new. More projects coming soon 🚀
+              Always cooking up something new
             </p>
           </div>
 
@@ -124,7 +124,7 @@ const Portfolio = () => {
           </div>
 
           <p className="text-xs text-gray-500">
-            © 2001 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of code
+            © 2001 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of HTML
           </p>
         </div>
       </div>
