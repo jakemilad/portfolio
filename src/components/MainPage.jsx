@@ -56,23 +56,23 @@ const MusicAlert = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="fixed top-20 right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
-      <div className="bg-[#000066] border-3 border-[#c0c0c0] border-ridge p-4 rounded shadow-xl max-w-xs">
+    <div className="fixed top-20 right-2 sm:right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
+      <div className="bg-[#000066] border-3 border-[#c0c0c0] border-ridge p-3 sm:p-4 rounded shadow-xl max-w-[200px] sm:max-w-xs">
         <div className="text-center">
-          <div className="text-2xl mb-2 animate-[pulse_1s_infinite]">🎵</div>
-          <div className="text-yellow-300 font-bold text-sm mb-2">
+          <div className="text-xl sm:text-2xl mb-2 animate-[pulse_1s_infinite]">🎵</div>
+          <div className="text-yellow-300 font-bold text-xs sm:text-sm mb-2">
             MUSIC AVAILABLE
           </div>
-          <div className="text-green-400 text-xs mb-3">
+          <div className="text-green-400 text-[10px] sm:text-xs mb-3">
             Click the volume button above to enjoy some tunes 🎶
           </div>
-          <div className="flex items-center justify-center gap-1 text-white text-xs">
+          <div className="flex items-center justify-center gap-1 text-white text-[10px] sm:text-xs">
             <span className="animate-[blink_1s_infinite]">♪</span>
             <span>Auto-dismissing...</span>
             <span className="animate-[blink_1s_infinite]">♪</span>
           </div>
         </div>
-        <div className="absolute -top-2 right-8 w-0 h-0 border-l-4 border-r-4 border-b-4 border-l-transparent border-r-transparent border-b-[#c0c0c0]"></div>
+        <div className="absolute -top-2 right-6 sm:right-8 w-0 h-0 border-l-4 border-r-4 border-b-4 border-l-transparent border-r-transparent border-b-[#c0c0c0]"></div>
       </div>
     </div>
   );
@@ -168,9 +168,9 @@ const Homepage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-5 mt-10">
+    <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-2 sm:p-5 mt-10">
       <MusicAlert show={showMusicAlert} onClose={() => setShowMusicAlert(false)} />
-      <div className="fixed top-4 right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden">
+      <div className="fixed top-4 right-2 sm:right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden z-50">
         {!isControlsMinimized ? (
 
           <div className="p-2 flex items-center gap-2">
@@ -221,11 +221,11 @@ const Homepage = () => {
         )}
       </div>
 
-      <div className="max-w-4xl mx-auto bg-[#000033] border-[5px] border-[#c0c0c0] border-solid p-5">
+      <div className="max-w-4xl mx-auto bg-[#000033] border-[3px] sm:border-[5px] border-[#c0c0c0] border-solid p-2 sm:p-5">
 
 
 
-        <RainbowText className="text-5xl font-bold block mb-6 [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff]">
+        <RainbowText className="text-2xl sm:text-4xl md:text-5xl font-bold block mb-4 sm:mb-6 [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff]">
           Jake Milad Portfolio
         </RainbowText>
         
@@ -249,23 +249,25 @@ const Homepage = () => {
         {/* <Divider /> */}
 
 
-        <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-3 my-5">
-          {[
-            // ['About Me', '/about', '👤'],
-            ['My Projects', '/portfolio', '🎮'],
-            ['Contact Me!', '#contact', '📧']
-          ].map(([text, href, icon], i) => (
-            <React.Fragment key={text}>
-              <Link 
-                href={href}
-                className="text-xl text-green-400 no-underline mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
-              >
-                <span className="animate-[pulse_2s_infinite]">{icon}</span>
-                <RainbowText>{text}</RainbowText>
-              </Link>
-              <span className="inline-block animate-[spin_3s_linear_infinite]">💫</span>
-            </React.Fragment>
-          ))}
+        <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-2 sm:p-3 my-3 sm:my-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0">
+            {[
+              // ['About Me', '/about', '👤'],
+              ['My Projects', '/portfolio', '🎮'],
+              ['Contact Me!', '#contact', '📧']
+            ].map(([text, href, icon], i) => (
+              <React.Fragment key={text}>
+                <Link 
+                  href={href}
+                  className="text-base sm:text-xl text-green-400 no-underline mx-2 sm:mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
+                >
+                  <span className="animate-[pulse_2s_infinite]">{icon}</span>
+                  <RainbowText>{text}</RainbowText>
+                </Link>
+                <span className="hidden sm:inline-block animate-[spin_3s_linear_infinite]">💫</span>
+              </React.Fragment>
+            ))}
+          </div>
         </nav>
 
         {/* <Divider /> */}
@@ -293,7 +295,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
      JJJJJJJJJ  AAAAAAA                   AAAAAAAKKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLLLLLLLLLLLLLLLAAAAAAA                   AAAAAAADDDDDDDDDDDDD        
           `}
             </pre>
-            </div>
+          </div>
         </div>
 
 
@@ -315,33 +317,32 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
         </div> */}
 
 
-        <div className="my-6">
-          <div className="text-center mb-3">
-            <RainbowText className="text-xl font-bold">
+        <div className="my-4 sm:my-6">
+          <div className="text-center mb-2 sm:mb-3">
+            <RainbowText className="text-base sm:text-xl font-bold">
               🕺 INTERACTIVE JAKE! 🕺
             </RainbowText>
-
           </div>
           
-          <div className="max-w-lg mx-auto mb-4">
+          <div className="max-w-lg mx-auto mb-3 sm:mb-4 px-2 sm:px-0">
             <div className="bg-[#000066] border-2 border-[#c0c0c0] border-groove p-2 rounded">
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-1 sm:gap-2">
                 {animations.map((anim) => (
                   <button
                     key={anim.id}
                     onClick={() => setCurrentAnimation(anim.id)}
                     className={`
-                      relative p-2 rounded border-2 transition-all duration-200 font-mono text-xs
+                      relative p-1.5 sm:p-2 rounded border-2 transition-all duration-200 font-mono text-xs
                       ${currentAnimation === anim.id 
                         ? 'bg-[#ff6b6b] border-[#ff9999] text-white border-outset' 
                         : 'bg-[#c0c0c0] border-[#808080] text-black border-outset hover:bg-[#d0d0d0]'
                       }
                     `}
                   >
-                    <div className="text-lg">{anim.emoji}</div>
-                    <div className="text-xs">{anim.name}</div>
+                    <div className="text-base sm:text-lg">{anim.emoji}</div>
+                    <div className="text-[10px] sm:text-xs">{anim.name}</div>
                     {currentAnimation === anim.id && (
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></div>
                     )}
                   </button>
                 ))}
@@ -350,7 +351,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           </div>
           
           <div className="max-w-4xl mx-auto bg-[#1a1a1a] border border-[#333] rounded-lg p-1 shadow-2xl">
-            <div className="h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
+            <div className="h-[280px] sm:h-[350px] md:h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
               <Avatar3DErrorBoundary fallback={<Simple2DAvatar />}>
                 <Avatar3D
                   modelPath={animations.find(a => a.id === currentAnimation)?.model}
@@ -364,63 +365,63 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
             </div>
             
             <div className="mt-1 text-center">
-              <div className="text-green-400 font-mono text-xs animate-pulse">
+              <div className="text-green-400 font-mono text-[10px] sm:text-xs animate-pulse">
                 ● JAKE - {animations.find(a => a.id === currentAnimation)?.name.toUpperCase()} MODE
               </div>
             </div>
           </div>
           
-          <div className="text-center mt-3">
-            <p className="text-yellow-300 text-xs animate-[blink_3s_infinite]">
+          <div className="text-center mt-2 sm:mt-3">
+            <p className="text-yellow-300 text-[10px] sm:text-xs animate-[blink_3s_infinite]">
               💻 Drag • Scroll • Click Buttons Above 💻
             </p>
           </div>
         </div>
 
 
-        <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-5 my-5">
-          <h2 className="text-2xl mb-6">
+        <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-3 sm:p-5 my-3 sm:my-5">
+          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6">
             <RainbowText>📧 CONTACT ME 📧</RainbowText>
           </h2>
           
-          <div className="max-w-md mx-auto space-y-4">
+          <div className="max-w-md mx-auto space-y-3 sm:space-y-4 px-1 sm:px-0">
             <ContactCard href="mailto:jake.milad@gmail.com" icon="📧" title="EMAIL" value="jake.milad@gmail.com" />
-            <ContactCard href="https://linkedin.com/in/jakemilad" icon="💼" title="LINKEDIN" value="https://linkedin.com/in/jakemilad" />
-            <ContactCard href="https://github.com/jakemilad" icon="👨‍💻" title="GITHUB" value="https://github.com/jakemilad" />
+            <ContactCard href="https://linkedin.com/in/jakemilad" icon="💼" title="LINKEDIN" value="linkedin.com/in/jakemilad" />
+            <ContactCard href="https://github.com/jakemilad" icon="👨‍💻" title="GITHUB" value="github.com/jakemilad" />
           </div>
 
-          <div className="mt-6 text-center">
-            <div className="text-yellow-300 text-sm animate-[blink_3s_infinite]">
+          <div className="mt-4 sm:mt-6 text-center">
+            <div className="text-yellow-300 text-xs sm:text-sm animate-[blink_3s_infinite]">
               💻 Click any link above to get in touch 💻
             </div>
           </div>
         </div>
 
 
-        <div className="my-5">
-          <p className="text-yellow-300">Visitors:</p>
-          <div className="inline-block bg-black text-red-500 font-['Courier_New'] p-2 border-2 border-[#808080] border-inset">
+        <div className="my-3 sm:my-5">
+          <p className="text-yellow-300 text-sm sm:text-base">Visitors:</p>
+          <div className="inline-block bg-black text-red-500 font-['Courier_New'] p-1.5 sm:p-2 text-sm sm:text-base border-2 border-[#808080] border-inset">
             {String(visitorCount).padStart(6, '0')}
           </div>
         </div>
 
 
 
-        <div className="overflow-hidden whitespace-nowrap my-5">
-          <div className="animate-[marquee_15s_linear_infinite]">
+        <div className="overflow-hidden whitespace-nowrap my-3 sm:my-5">
+          <div className="animate-[marquee_15s_linear_infinite] text-xs sm:text-base">
             ⭐️ This Counter Doesn't work ⭐️ It's Hardcoded ⭐️ Or is it.. ⭐️
           </div>
         </div>
 
 
-        <p className="text-xs text-gray-500">
+        <p className="text-[10px] sm:text-xs text-gray-500">
           © 2001
         </p>
       </div>
 
-      <div className="my-5 text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
+      <div className="my-3 sm:my-5 text-base sm:text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
           <div className="animate-[marquee_10s_linear_infinite]">
-            🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧
+            🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧
           </div>
       </div>
 
