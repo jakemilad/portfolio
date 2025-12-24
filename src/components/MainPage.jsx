@@ -79,7 +79,7 @@ const MusicAlert = ({ show, onClose }) => {
 };
 
 
-const NinetyHomepage = () => {
+const Homepage = () => {
   const [visitorCount, setVisitorCount] = useState(13492);
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(null);
@@ -480,4 +480,4 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
   );
 };
 
-export default NinetyHomepage;
+export default Homepage;
