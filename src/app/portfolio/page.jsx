@@ -118,13 +118,10 @@ const Portfolio = () => {
           </Link>
 
           <div className="overflow-hidden whitespace-nowrap my-5">
-            <div className="animate-[marquee_15s_linear_infinite] text-xs">
-              ⭐️ Built with passion and probably too much coffee ⭐️
-            </div>
           </div>
 
           <p className="text-xs text-gray-500">
-            © 2001 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of HTML
+            © 2001
           </p>
         </div>
       </div>

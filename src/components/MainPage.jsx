@@ -230,11 +230,6 @@ const NinetyHomepage = () => {
         </RainbowText>
         
 
-        <div className="my-5 text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
-          <div className="animate-[marquee_10s_linear_infinite]">
-            🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧
-          </div>
-        </div>
 
         {/* <Divider /> */}
 
@@ -410,6 +405,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
         </div>
 
 
+
         <div className="overflow-hidden whitespace-nowrap my-5">
           <div className="animate-[marquee_15s_linear_infinite]">
             ⭐️ This Counter Doesn't work ⭐️ It's Hardcoded ⭐️ Or is it.. ⭐️
@@ -418,10 +414,15 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
 
         <p className="text-xs text-gray-500">
-          © 2001 - Made with <span className="animate-[pulse_2s_infinite]">❤️</span> and lots of HTML
+          © 2001
         </p>
       </div>
 
+      <div className="my-5 text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
+          <div className="animate-[marquee_10s_linear_infinite]">
+            🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧 THIS IS ALWAYS A WORK IN PROGRESS 🚧
+          </div>
+      </div>
 
       <style jsx global>{`
         @keyframes rainbow {
