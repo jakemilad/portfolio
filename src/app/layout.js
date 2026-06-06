@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import GlobalMusicPlayer from "@/components/GlobalMusicPlayer";
+import GlobalThemeSwitcher from "@/components/GlobalThemeSwitcher";
 
 export const metadata = {
   title: "Jake's Website",
@@ -16,9 +17,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var savedTheme = localStorage.getItem('portfolio-theme');
+                var themes = ['classic', 'cyber', 'toxic', 'sunset', 'ice'];
+                if (themes.includes(savedTheme)) document.documentElement.dataset.theme = savedTheme;
+              } catch (error) {}
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased">
         <GlobalMusicPlayer />
+        <GlobalThemeSwitcher />
         {children}
       </body>
     </html>

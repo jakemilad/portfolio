@@ -23,7 +23,7 @@ const Portfolio = () => {
         "Automated container setup by generating minimal root filesystems with selective binary/library injection and integrated networking utilities",
         "Debugged kernel-level edge cases across architectures, fixing namespace conflicts and ensuring ARM64 compatibility"
       ],
-      color: '#00ffff'
+      color: 'var(--theme-project-one)'
     },
     {
       id: 'spendy',
@@ -38,7 +38,7 @@ const Portfolio = () => {
         "Delivers rich visual analytics (pie charts, time series, summaries) with dynamic caching and rate-limiting for optimal performance",
         "Engineered a parallelized data pipeline with category-level caching to minimize API costs, reduce latency, and enable real-time recommendations"
       ],
-      color: '#ff00ff'
+      color: 'var(--theme-project-two)'
     }
   ];
 
@@ -62,7 +62,7 @@ const Portfolio = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="border-[3px] border-[#c0c0c0] border-solid bg-[#000066] p-6 hover:shadow-[0_0_20px_rgba(255,255,0,0.3)] transition-all"
+              className="theme-project-card border-[3px] border-[#c0c0c0] border-solid bg-[#000066] p-6 transition-all"
             >
               <div className="mb-4 pb-3 border-b-2 border-[#c0c0c0]">
                 <div className="flex items-center gap-3 mb-2">
@@ -128,12 +128,12 @@ const Portfolio = () => {
 
       <style jsx global>{`
         @keyframes rainbow {
-          0% { color: #ff0000; }
-          20% { color: #ffff00; }
-          40% { color: #00ff00; }
-          60% { color: #00ffff; }
-          80% { color: #ff00ff; }
-          100% { color: #ff0000; }
+          0% { color: var(--theme-rainbow-1); }
+          20% { color: var(--theme-rainbow-2); }
+          40% { color: var(--theme-rainbow-3); }
+          60% { color: var(--theme-rainbow-4); }
+          80% { color: var(--theme-rainbow-5); }
+          100% { color: var(--theme-rainbow-1); }
         }
 
         @keyframes blink {

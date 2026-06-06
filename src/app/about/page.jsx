@@ -174,12 +174,12 @@ const About = () => {
 
       <style jsx global>{`
         @keyframes rainbow {
-          0% { color: #ff0000; }
-          20% { color: #ffff00; }
-          40% { color: #00ff00; }
-          60% { color: #00ffff; }
-          80% { color: #ff00ff; }
-          100% { color: #ff0000; }
+          0% { color: var(--theme-rainbow-1); }
+          20% { color: var(--theme-rainbow-2); }
+          40% { color: var(--theme-rainbow-3); }
+          60% { color: var(--theme-rainbow-4); }
+          80% { color: var(--theme-rainbow-5); }
+          100% { color: var(--theme-rainbow-1); }
         }
 
         @keyframes blink {

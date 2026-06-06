@@ -7,7 +7,7 @@ const MusicAlert = ({ show }) => {
   if (!show) return null;
 
   return (
-    <div className="fixed top-20 right-2 sm:right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
+    <div className="fixed top-28 right-2 sm:right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
       <div className="bg-[#000066] border-3 border-[#c0c0c0] border-ridge p-3 sm:p-4 rounded shadow-xl max-w-[200px] sm:max-w-xs">
         <div className="text-center">
           <div className="text-xl sm:text-2xl mb-2 animate-[pulse_1s_infinite]">🎵</div>
