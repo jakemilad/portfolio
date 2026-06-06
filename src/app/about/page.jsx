@@ -10,7 +10,7 @@ const aboutMeSection = () => {
 
       <div className='bg-[#000066] border-[3px] border-[#c0c0c0] border-inset p-3'>
         <h3 className='text-xl mb-2 text-yellow-300'>Education</h3>
-        <p>Studied Business + Computer Science at UBC.</p>
+        <p>Business + Computer Science at UBC.</p>
       </div>
 
       <div className='bg-[#000066] border-[3px] border-[#c0c0c0] border-inset p-3'>

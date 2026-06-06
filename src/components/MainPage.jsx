@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { Music, Volume2, VolumeX } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import ContactCard from './ContactCard';
@@ -52,41 +51,9 @@ const Simple2DAvatar = () => (
   </div>
 );
 
-const MusicAlert = ({ show, onClose }) => {
-  if (!show) return null;
-
-  return (
-    <div className="fixed top-20 right-2 sm:right-4 z-40 animate-[slideInRight_0.5s_ease-out]">
-      <div className="bg-[#000066] border-3 border-[#c0c0c0] border-ridge p-3 sm:p-4 rounded shadow-xl max-w-[200px] sm:max-w-xs">
-        <div className="text-center">
-          <div className="text-xl sm:text-2xl mb-2 animate-[pulse_1s_infinite]">🎵</div>
-          <div className="text-yellow-300 font-bold text-xs sm:text-sm mb-2">
-            MUSIC AVAILABLE
-          </div>
-          <div className="text-green-400 text-[10px] sm:text-xs mb-3">
-            Click the volume button above to enjoy some tunes 🎶
-          </div>
-          <div className="flex items-center justify-center gap-1 text-white text-[10px] sm:text-xs">
-            <span className="animate-[blink_1s_infinite]">♪</span>
-            <span>Auto-dismissing...</span>
-            <span className="animate-[blink_1s_infinite]">♪</span>
-          </div>
-        </div>
-        <div className="absolute -top-2 right-6 sm:right-8 w-0 h-0 border-l-4 border-r-4 border-b-4 border-l-transparent border-r-transparent border-b-[#c0c0c0]"></div>
-      </div>
-    </div>
-  );
-};
-
-
 const Homepage = () => {
   const [visitorCount, setVisitorCount] = useState(13492);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [currentTime, setCurrentTime] = useState(null);
   const [currentAnimation, setCurrentAnimation] = useState('run');
-  const [isControlsMinimized, setIsControlsMinimized] = useState(false);
-  const [showMusicAlert, setShowMusicAlert] = useState(false);
-  const audioRef = useRef(null);
 
   const [showDebug, setShowDebug] = useState(false);
 
@@ -100,45 +67,6 @@ const Homepage = () => {
   ];
 
   // const emojis = ['😁', '🤟', '🥶', '⚽', '🤢']
-
-  useEffect(() => {
-    setCurrentTime(new Date());
-    
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    
-    return () => clearInterval(timer);ca
-  }, []);
-
-  useEffect(() => {
-    const playAudio = async () => {
-      if (audioRef.current) {
-        try {
-          await audioRef.current.play();
-          setIsPlaying(true);
-        } catch (error) {
-          console.log('Autoplay prevented:', error);
-          setIsPlaying(false);
-          setShowMusicAlert(true);
-        }
-      }
-    };
-
-    const timeoutId = setTimeout(playAudio, 100);
-    
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  useEffect(() => {
-    if (showMusicAlert) {
-      const timeoutId = setTimeout(() => {
-        setShowMusicAlert(false);
-      }, 3000);
-      
-      return () => clearTimeout(timeoutId);
-    }
-  }, [showMusicAlert]);
 
   const RainbowText = ({ children, className = "" }) => (
     <span className={`inline-block animate-[rainbow_3s_infinite] ${className}`}>
@@ -156,71 +84,8 @@ const Homepage = () => {
     </div>
   );
 
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black bg-repeat text-green-400 font-['Comic_Sans_MS'] text-center p-2 sm:p-5 mt-10">
-      <MusicAlert show={showMusicAlert} onClose={() => setShowMusicAlert(false)} />
-      <div className="fixed top-4 right-2 sm:right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden z-50">
-        {!isControlsMinimized ? (
-
-          <div className="p-2 flex items-center gap-2">
-
-            <div className="bg-black text-red-500 font-mono p-1 border border-[#808080] border-inset rounded text-sm">
-              {currentTime ? currentTime.toLocaleTimeString() : "00:00:00"}
-            </div>
-            <div className="w-px h-6 bg-[#c0c0c0]"></div>
-            <Music className="w-5 h-5" />
-            <button
-              onClick={toggleAudio}
-              className="hover:text-yellow-300"
-            >
-              {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
-            </button>
-            <div className="w-px h-6 bg-[#c0c0c0]"></div>
-
-            <button
-              onClick={() => setIsControlsMinimized(true)}
-              className="hover:text-yellow-300 text-xs font-mono"
-              title="Minimize controls"
-            >
-              ⊟
-            </button>
-            <audio 
-              ref={audioRef}
-              loop 
-              src="/lake.mp3"
-            >
-              Your browser doesn't support audio playback
-            </audio>
-          </div>
-        ) : (
-
-          <div className="p-1 flex items-center gap-1">
-
-            <div className="text-red-500 text-xs font-mono">●</div>
-            <div className="text-green-400 text-xs">♪</div>
-
-            <button
-              onClick={() => setIsControlsMinimized(false)}
-              className="hover:text-yellow-300 text-xs font-mono ml-1"
-              title="Restore controls"
-            >
-              ⊞
-            </button>
-          </div>
-        )}
-      </div>
-
       <div className="max-w-4xl mx-auto bg-[#000033] border-[3px] sm:border-[5px] border-[#c0c0c0] border-solid p-2 sm:p-5">
 
 
