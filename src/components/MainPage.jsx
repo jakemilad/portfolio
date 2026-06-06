@@ -117,7 +117,7 @@ const Homepage = () => {
         <nav className="bg-[#000066] border-[3px] border-[#c0c0c0] border-groove p-2 sm:p-3 my-3 sm:my-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0">
             {[
-              // ['About Me', '/about', '👤'],
+              ['About Me', '/about', '👤'],
               ['My Projects', '/portfolio', '🎮'],
               ['Contact Me!', '#contact', '📧']
             ].map(([text, href, icon], i) => (
