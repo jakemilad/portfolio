@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import VintageCursor from "@/components/VintageCursor";
 import GlobalMusicPlayer from "@/components/GlobalMusicPlayer";
 
 export const metadata = {
@@ -19,7 +18,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* <VintageCursor /> */}
         <GlobalMusicPlayer />
         {children}
       </body>

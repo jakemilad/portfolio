@@ -19,3 +19,37 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32' shape-rendering='crispEdges'%3E%3Cpath d='M1 1v23l6-6 4 12 6-3-5-11h10z' fill='%23fff' stroke='%23000' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M4 5v12l3-3 2 5 2-1-2-5h6z' fill='%23c0c0c0'/%3E%3C/svg%3E") 1 1, auto;
+    --cursor-interactive: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32' shape-rendering='crispEdges'%3E%3Cpath d='M1 1v23l6-6 4 12 6-3-5-11h10z' fill='%23ffff00' stroke='%23000' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M4 5v12l3-3 2 5 2-1-2-5h6z' fill='%23fff'/%3E%3C/svg%3E") 1 1, pointer;
+    --cursor-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32' shape-rendering='crispEdges'%3E%3Cpath d='M1 1v23l6-6 4 12 6-3-5-11h10z' fill='%23ff4040' stroke='%23000' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M4 5v12l3-3 2 5 2-1-2-5h6z' fill='%23fff'/%3E%3C/svg%3E") 1 1, pointer;
+  }
+
+  body {
+    cursor: var(--cursor-default);
+  }
+
+  a,
+  button,
+  [role="button"],
+  summary,
+  select,
+  label[for] {
+    cursor: var(--cursor-interactive);
+  }
+
+  a:active,
+  button:active,
+  [role="button"]:active,
+  summary:active {
+    cursor: var(--cursor-active);
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+}
