@@ -167,7 +167,6 @@ export default function About() {
         </section>
 
         <section className="border-[3px] border-[#c0c0c0] bg-[#000066] p-5 text-center sm:p-7">
-          <div className="mb-2 font-mono text-xs text-yellow-300">NEXT DESTINATION?</div>
           <h2 className="mb-5 text-2xl font-bold sm:text-3xl">
             <RainbowText>See What I&apos;ve Built</RainbowText>
           </h2>
@@ -186,12 +185,6 @@ export default function About() {
             </Link>
           </div>
         </section>
-
-        <div className="mt-5 overflow-hidden whitespace-nowrap font-mono text-xs text-yellow-300">
-          <div className="animate-[marquee_14s_linear_infinite]">
-            PRODUCT APPLICATIONS / PLATFORM TOOLING / SYSTEMS INTERFACES / DEVELOPER EXPERIENCE /
-          </div>
-        </div>
       </div>
 
       <style jsx global>{`
