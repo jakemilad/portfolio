@@ -258,7 +258,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
                   CONTACT INFO UNLOCKED
                 </div>
                 <p className="mt-2 text-green-400 text-xs sm:text-sm">
-                  You defeated JAKE. The sacred links are yours.
+                  You defeated JAKE. The links are yours.
                 </p>
               </div>
 
