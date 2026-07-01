@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import ContactCard from './ContactCard';
+import PokemonBattle from './PokemonBattle';
 
 class Avatar3DErrorBoundary extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Avatar3DErrorBoundary extends React.Component {
 }
 
 
-const Avatar3D = dynamic(() => import('./Avatar3D'), { 
+const Avatar3D = dynamic(() => import('./Avatar3D'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-[#000066] border-2 border-[#c0c0c0] border-inset">
@@ -54,6 +55,8 @@ const Simple2DAvatar = () => (
 const Homepage = () => {
   const [visitorCount, setVisitorCount] = useState(13492);
   const [currentAnimation, setCurrentAnimation] = useState('run');
+  const [contactUnlocked, setContactUnlocked] = useState(false);
+  const [contactChallengeStarted, setContactChallengeStarted] = useState(false);
 
   const [showDebug, setShowDebug] = useState(false);
 
@@ -78,7 +81,7 @@ const Homepage = () => {
     <div className="flex items-center justify-center my-4">
       {[...Array(5)].map((_, i) => (
         <span key={i} className="mx-1 text-2xl animate-[spin_1s_linear_infinite]">
-            🧍‍♂️
+          🧍‍♂️
         </span>
       ))}
     </div>
@@ -93,7 +96,7 @@ const Homepage = () => {
         <RainbowText className="text-2xl sm:text-4xl md:text-5xl font-bold block mb-4 sm:mb-6 [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff]">
           Jake Milad Portfolio
         </RainbowText>
-        
+
 
 
         {/* <Divider /> */}
@@ -122,7 +125,7 @@ const Homepage = () => {
               ['Contact Me!', '#contact', '📧']
             ].map(([text, href, icon], i) => (
               <React.Fragment key={text}>
-                <Link 
+                <Link
                   href={href}
                   className="text-base sm:text-xl text-green-400 no-underline mx-2 sm:mx-3 hover:text-yellow-300 hover:underline inline-flex items-center gap-2"
                 >
@@ -139,9 +142,9 @@ const Homepage = () => {
 
 
         <div className="overflow-hidden whitespace-nowrap my-4">
-        <div className="animate-[marquee_20s_linear_infinite]">
-        <pre className="font-mono text-yellow-300 text-xs inline-block">
-        {`
+          <div className="animate-[marquee_20s_linear_infinite]">
+            <pre className="font-mono text-yellow-300 text-xs inline-block">
+              {`
           JJJJJJJJJJJ          AAA               KKKKKKKKK    KKKKKKKEEEEEEEEEEEEEEEEEEEEEE     MMMMMMMM               MMMMMMMMIIIIIIIIIILLLLLLLLLLL                            AAA               DDDDDDDDDDDDD        
           J:::::::::J         A:::A              K:::::::K    K:::::KE::::::::::::::::::::E     M:::::::M             M:::::::MI::::::::IL:::::::::L                           A:::A              D::::::::::::DDD     
           J:::::::::J        A:::::A             K:::::::K    K:::::KE::::::::::::::::::::E     M::::::::M           M::::::::MI::::::::IL:::::::::L                          A:::::A             D:::::::::::::::DD   
@@ -188,7 +191,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
               🕺 INTERACTIVE JAKE! 🕺
             </RainbowText>
           </div>
-          
+
           <div className="max-w-lg mx-auto mb-3 sm:mb-4 px-2 sm:px-0">
             <div className="bg-[#000066] border-2 border-[#c0c0c0] border-groove p-2 rounded">
               <div className="grid grid-cols-3 gap-1 sm:gap-2">
@@ -198,8 +201,8 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
                     onClick={() => setCurrentAnimation(anim.id)}
                     className={`
                       relative p-1.5 sm:p-2 rounded border-2 transition-all duration-200 font-mono text-xs
-                      ${currentAnimation === anim.id 
-                        ? 'bg-[#ff6b6b] border-[#ff9999] text-white border-outset' 
+                      ${currentAnimation === anim.id
+                        ? 'bg-[#ff6b6b] border-[#ff9999] text-white border-outset'
                         : 'bg-[#c0c0c0] border-[#808080] text-black border-outset hover:bg-[#d0d0d0]'
                       }
                     `}
@@ -214,7 +217,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
               </div>
             </div>
           </div>
-          
+
           <div className="max-w-4xl mx-auto bg-[#1a1a1a] border border-[#333] rounded-lg p-1 shadow-2xl">
             <div className="h-[280px] sm:h-[350px] md:h-[380px] bg-[#0a0a0a] rounded border border-[#222] relative overflow-hidden">
               <Avatar3DErrorBoundary fallback={<Simple2DAvatar />}>
@@ -225,17 +228,17 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
                   className="w-full h-full"
                 />
               </Avatar3DErrorBoundary>
-              
+
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 pointer-events-none"></div>
             </div>
-            
+
             <div className="mt-1 text-center">
               <div className="text-green-400 font-mono text-[10px] sm:text-xs animate-pulse">
                 ● JAKE - {animations.find(a => a.id === currentAnimation)?.name.toUpperCase()} MODE
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mt-2 sm:mt-3">
             <p className="text-yellow-300 text-[10px] sm:text-xs animate-[blink_3s_infinite]">
               💻 Drag • Scroll • Click Buttons Above 💻
@@ -243,23 +246,61 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
           </div>
         </div>
 
-
         <div id="contact" className="bg-[#000066] border-[3px] border-[#c0c0c0] border-ridge p-3 sm:p-5 my-3 sm:my-5">
           <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6">
             <RainbowText>📧 CONTACT ME 📧</RainbowText>
           </h2>
-          
-          <div className="max-w-md mx-auto space-y-3 sm:space-y-4 px-1 sm:px-0">
-            <ContactCard href="mailto:jake.milad@gmail.com" icon="📧" title="EMAIL" value="jake.milad@gmail.com" />
-            <ContactCard href="https://linkedin.com/in/jakemilad" icon="💼" title="LINKEDIN" value="linkedin.com/in/jakemilad" />
-            <ContactCard href="https://github.com/jakemilad" icon="👨‍💻" title="GITHUB" value="github.com/jakemilad" />
-          </div>
 
-          <div className="mt-4 sm:mt-6 text-center">
-            <div className="text-yellow-300 text-xs sm:text-sm animate-[blink_3s_infinite]">
-              💻 Click any link above to get in touch 💻
+          {contactUnlocked ? (
+            <>
+              <div className="mx-auto mb-4 max-w-xl border-2 border-[#c0c0c0] border-inset bg-black p-3 text-center font-mono">
+                <div className="text-yellow-300 text-sm sm:text-base">
+                  CONTACT INFO UNLOCKED
+                </div>
+                <p className="mt-2 text-green-400 text-xs sm:text-sm">
+                  You defeated JAKE. The sacred links are yours.
+                </p>
+              </div>
+
+              <div className="max-w-md mx-auto space-y-3 sm:space-y-4 px-1 sm:px-0">
+                <ContactCard href="mailto:jake.milad@gmail.com" icon="📧" title="EMAIL" value="jake.milad@gmail.com" />
+                <ContactCard href="https://linkedin.com/in/jakemilad" icon="💼" title="LINKEDIN" value="linkedin.com/in/jakemilad" />
+                <ContactCard href="https://github.com/jakemilad" icon="👨‍💻" title="GITHUB" value="github.com/jakemilad" />
+              </div>
+
+              <div className="mt-4 sm:mt-6 text-center">
+                <div className="text-yellow-300 text-xs sm:text-sm animate-[blink_3s_infinite]">
+                  💻 Click any link above to get in touch 💻
+                </div>
+              </div>
+            </>
+          ) : !contactChallengeStarted ? (
+            <div className="mx-auto max-w-xl border-2 border-[#c0c0c0] border-inset bg-black p-3 sm:p-5 text-center font-mono">
+              <p className="text-green-400 text-xs sm:text-sm">
+                If you want my contact information:
+              </p>
+              <button
+                type="button"
+                onClick={() => setContactChallengeStarted(true)}
+                className="mt-3 inline-block bg-[#c0c0c0] border-[3px] border-[#808080] border-outset px-4 py-3 text-sm sm:text-base text-black hover:bg-[#d0d0d0] active:border-inset"
+              >
+                CLICK HERE FOR CONTACT
+              </button>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-3 sm:space-y-4">
+              <div className="mx-auto max-w-xl border-2 border-[#c0c0c0] border-inset bg-black p-3 text-center font-mono">
+                <div className="text-yellow-300 text-sm sm:text-base animate-[blink_3s_infinite]">
+                  YOU HAVE TO BEAT ME FIRST
+                </div>
+                <p className="mt-2 text-green-400 text-xs sm:text-sm">
+                  Win the battle to unlock email, LinkedIn, and GitHub.
+                </p>
+              </div>
+
+              <PokemonBattle onVictory={() => setTimeout(() => setContactUnlocked(true), 1200)} />
+            </div>
+          )}
         </div>
 
 
@@ -285,9 +326,9 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
       </div>
 
       <div className="my-3 sm:my-5 text-base sm:text-2xl text-red-500 animate-[blink_1s_infinite] overflow-hidden whitespace-nowrap">
-          <div className="animate-[marquee_10s_linear_infinite]">
-            🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧
-          </div>
+        <div className="animate-[marquee_10s_linear_infinite]">
+          🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧 WORK IN PROGRESS 🚧
+        </div>
       </div>
 
       <style jsx global>{`

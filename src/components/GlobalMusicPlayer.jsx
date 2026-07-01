@@ -34,7 +34,9 @@ export default function GlobalMusicPlayer() {
   const [currentTime, setCurrentTime] = useState(null);
   const [isControlsMinimized, setIsControlsMinimized] = useState(false);
   const [showMusicAlert, setShowMusicAlert] = useState(false);
+  const [needsUserGesture, setNeedsUserGesture] = useState(false);
   const audioRef = useRef(null);
+  const controlsRef = useRef(null);
 
   useEffect(() => {
     setCurrentTime(new Date());
@@ -46,20 +48,43 @@ export default function GlobalMusicPlayer() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const playAudio = async () => {
-      try {
-        await audioRef.current?.play();
-      } catch (error) {
-        console.log('Autoplay prevented:', error);
-        setShowMusicAlert(true);
-      }
-    };
+  const playAudio = async ({ showAlertOnBlock = false } = {}) => {
+    if (!audioRef.current) return;
 
-    const timeoutId = setTimeout(playAudio, 100);
+    try {
+      audioRef.current.volume = 0.45;
+      await audioRef.current.play();
+      setNeedsUserGesture(false);
+      setShowMusicAlert(false);
+    } catch (error) {
+      console.log('Audio playback prevented:', error);
+      setNeedsUserGesture(true);
+      if (showAlertOnBlock) setShowMusicAlert(true);
+    }
+  };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => playAudio({ showAlertOnBlock: true }), 100);
 
     return () => clearTimeout(timeoutId);
   }, []);
+
+  useEffect(() => {
+    if (!needsUserGesture) return undefined;
+
+    const resumeAfterGesture = (event) => {
+      if (controlsRef.current?.contains(event.target)) return;
+      playAudio();
+    };
+
+    document.addEventListener('pointerdown', resumeAfterGesture);
+    document.addEventListener('keydown', resumeAfterGesture);
+
+    return () => {
+      document.removeEventListener('pointerdown', resumeAfterGesture);
+      document.removeEventListener('keydown', resumeAfterGesture);
+    };
+  }, [needsUserGesture]);
 
   useEffect(() => {
     if (!showMusicAlert) return;
@@ -75,12 +100,7 @@ export default function GlobalMusicPlayer() {
     if (!audioRef.current) return;
 
     if (audioRef.current.paused) {
-      try {
-        await audioRef.current.play();
-        setShowMusicAlert(false);
-      } catch (error) {
-        console.log('Audio playback failed:', error);
-      }
+      await playAudio({ showAlertOnBlock: true });
     } else {
       audioRef.current.pause();
     }
@@ -89,7 +109,10 @@ export default function GlobalMusicPlayer() {
   return (
     <>
       <MusicAlert show={showMusicAlert} />
-      <div className="fixed top-4 right-2 sm:right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden z-50 text-green-400">
+      <div
+        ref={controlsRef}
+        className="fixed top-4 right-2 sm:right-4 bg-[#000066] border-2 border-[#c0c0c0] border-ridge rounded overflow-hidden z-50 text-green-400"
+      >
         {!isControlsMinimized ? (
           <div className="p-2 flex items-center gap-2">
             <div className="bg-black text-red-500 font-mono p-1 border border-[#808080] border-inset rounded text-sm">
@@ -133,6 +156,8 @@ export default function GlobalMusicPlayer() {
       <audio
         ref={audioRef}
         loop
+        preload="auto"
+        playsInline
         src="/lake.mp3"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
