@@ -35,8 +35,27 @@ export default function GlobalMusicPlayer() {
   const [isControlsMinimized, setIsControlsMinimized] = useState(false);
   const [showMusicAlert, setShowMusicAlert] = useState(false);
   const [needsUserGesture, setNeedsUserGesture] = useState(false);
+  const [isModernEra, setIsModernEra] = useState(false);
   const audioRef = useRef(null);
   const controlsRef = useRef(null);
+
+  useEffect(() => {
+    setIsModernEra(document.documentElement.dataset.era === '2026');
+
+    const onEraChanged = (event) => {
+      const modern = event.detail?.era === '2026';
+      if (modern) {
+        audioRef.current?.pause();
+      } else {
+        // Let the <audio> element remount before resuming the retro tunes.
+        setTimeout(() => playAudio(), 200);
+      }
+      setIsModernEra(modern);
+    };
+
+    window.addEventListener('era-changed', onEraChanged);
+    return () => window.removeEventListener('era-changed', onEraChanged);
+  }, []);
 
   useEffect(() => {
     setCurrentTime(new Date());
@@ -50,6 +69,7 @@ export default function GlobalMusicPlayer() {
 
   const playAudio = async ({ showAlertOnBlock = false } = {}) => {
     if (!audioRef.current) return;
+    if (document.documentElement.dataset.era === '2026') return;
 
     try {
       audioRef.current.volume = 0.45;
@@ -105,6 +125,8 @@ export default function GlobalMusicPlayer() {
       audioRef.current.pause();
     }
   };
+
+  if (isModernEra) return null;
 
   return (
     <>

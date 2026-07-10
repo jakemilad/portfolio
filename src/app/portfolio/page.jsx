@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import EraTrigger from '@/components/modern/EraTrigger';
 
 const Portfolio = () => {
   const RainbowText = ({ children, className = "" }) => (
@@ -121,7 +122,7 @@ const Portfolio = () => {
           </div>
 
           <p className="text-xs text-gray-500">
-            © 2001
+            <EraTrigger />
           </p>
         </div>
       </div>

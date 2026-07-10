@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import EraTrigger from '@/components/modern/EraTrigger';
 
 const focusAreas = [
   {
@@ -185,6 +186,10 @@ export default function About() {
             </Link>
           </div>
         </section>
+
+        <p className="mt-6 text-center text-xs text-gray-500">
+          <EraTrigger />
+        </p>
       </div>
 
       <style jsx global>{`

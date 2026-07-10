@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import ContactCard from './ContactCard';
 import PokemonBattle from './PokemonBattle';
+import EraTrigger from './modern/EraTrigger';
 
 class Avatar3DErrorBoundary extends React.Component {
   constructor(props) {
@@ -321,7 +322,7 @@ J:::::::JJJ:::::::JA:::::A             A:::::A   K:::::::K   K::::::KEE::::::EEE
 
 
         <p className="text-[10px] sm:text-xs text-gray-500">
-          © 2001
+          <EraTrigger />
         </p>
       </div>
 

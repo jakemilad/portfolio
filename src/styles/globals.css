@@ -1037,3 +1037,200 @@ body {
     cursor: text;
   }
 }
+
+/* ============================================================
+   ERA 2026 — time-warp easter egg
+   ============================================================ */
+
+:root {
+  --m-scope: #0D1020;
+  --m-scope-deep: #070A16;
+  --m-phosphor: #FFB000;
+  --m-phosphor-dim: rgba(255, 176, 0, 0.35);
+  --m-porcelain: #F2F3F1;
+  --m-paper: #FAFAF8;
+  --m-ink: #0E1116;
+  --m-slate: #5C6470;
+  --m-signal: #FF4D2E;
+  --m-hairline: rgba(14, 17, 22, 0.12);
+}
+
+/* Lock the retro site away while 2026 is active. Applies pre-paint on
+   reload because data-era is set by the inline head script. */
+html[data-era="2026"],
+html[data-era="2026"] body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html[data-era="2026"] body {
+  background: var(--m-scope);
+  cursor: auto;
+}
+
+html[data-era="2026"] body > *:not(#time-machine) {
+  display: none;
+}
+
+html[data-era="2026"] #time-machine a,
+html[data-era="2026"] #time-machine button,
+html[data-era="2026"] #time-machine [role="button"] {
+  cursor: pointer;
+}
+
+/* Modern-era type roles (variables provided by next/font in layout.js) */
+.m-display { font-family: var(--font-display), "Arial Black", sans-serif; }
+.m-body { font-family: var(--font-geist), Arial, sans-serif; }
+.m-mono { font-family: var(--font-geist-mono), "Courier New", monospace; }
+
+/* --- EraTrigger glitch tiers --- */
+@keyframes era-glitch-1 {
+  0%, 100% { text-shadow: none; }
+  50% { text-shadow: 1px 0 rgba(255, 0, 60, 0.8), -1px 0 rgba(0, 200, 255, 0.8); }
+}
+
+@keyframes era-glitch-2 {
+  0%, 100% { text-shadow: 2px 0 rgba(255, 0, 60, 0.9), -2px 0 rgba(0, 200, 255, 0.9); transform: skewX(0deg); }
+  25% { transform: skewX(-8deg) translateX(1px); }
+  75% { transform: skewX(6deg) translateX(-1px); }
+}
+
+@keyframes era-glitch-3 {
+  0%, 100% { text-shadow: 3px 0 rgba(255, 0, 60, 1), -3px 0 rgba(0, 200, 255, 1); transform: none; opacity: 1; }
+  20% { transform: translate(2px, -1px) skewX(-12deg); opacity: 0.7; }
+  40% { transform: translate(-2px, 1px); opacity: 1; }
+  60% { transform: translate(1px, 2px) skewX(10deg); opacity: 0.4; }
+  80% { transform: translate(-1px, -2px); opacity: 0.9; }
+}
+
+.era-trigger { color: inherit; font: inherit; }
+.era-trigger:hover .era-trigger__year { text-decoration: underline dotted; }
+.era-trigger.is-glitching-1 .era-trigger__year { animation: era-glitch-1 0.18s infinite; }
+.era-trigger.is-glitching-2 .era-trigger__year { animation: era-glitch-2 0.12s infinite; color: #fff; }
+.era-trigger.is-glitching-3 .era-trigger__year { animation: era-glitch-3 0.08s infinite; color: #fff; }
+
+/* --- Warp overlay (terminal boot log) --- */
+@keyframes era-warp-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.6; }
+  94% { opacity: 1; }
+  97% { opacity: 0.8; }
+}
+
+@keyframes era-blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes era-warp-flash {
+  0% { opacity: 0; }
+  40% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes era-log-line {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.era-warp {
+  animation: era-warp-flicker 2.2s infinite;
+}
+
+.era-warp__scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 3px,
+    transparent 4px
+  );
+}
+
+.era-warp__line {
+  animation: era-log-line 0.16s ease-out both;
+}
+
+.era-warp__caret {
+  animation: era-blink-cursor 0.8s step-end infinite;
+}
+
+.era-warp__flash {
+  animation: era-warp-flash 0.5s ease-out both;
+}
+
+/* --- Modern site enter / exit --- */
+@keyframes era-modern-in {
+  from { opacity: 0; transform: scale(1.015); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes era-crt-off {
+  0% { transform: scaleY(1); filter: brightness(1); opacity: 1; }
+  55% { transform: scaleY(0.006); filter: brightness(3.5); opacity: 1; }
+  70% { transform: scaleY(0.006) scaleX(0.6); filter: brightness(4); opacity: 1; }
+  100% { transform: scaleY(0.001) scaleX(0.02); filter: brightness(6); opacity: 0; }
+}
+
+.era-modern-enter { animation: era-modern-in 0.5s ease-out both; }
+.era-crt-off { animation: era-crt-off 0.7s cubic-bezier(0.6, 0, 0.9, 1) both; transform-origin: center center; }
+
+/* --- Scroll reveals --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger helpers for revealed children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 90ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 180ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 270ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 360ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 450ms; }
+
+/* --- Hero telemetry pulse --- */
+@keyframes era-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.era-live-dot { animation: era-live-pulse 1.6s ease-in-out infinite; }
+
+/* --- Reduced motion: scoped to the easter egg, retro marquees untouched --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .era-trigger .era-trigger__year,
+  .era-warp,
+  .era-warp__line,
+  .era-warp__caret,
+  .era-warp__flash,
+  .era-modern-enter,
+  .era-crt-off,
+  .era-live-dot {
+    animation: none !important;
+  }
+}
