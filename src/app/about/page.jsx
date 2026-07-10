@@ -49,7 +49,7 @@ export default function About() {
     <main className="min-h-screen bg-black px-3 py-16 text-green-400 sm:px-5 font-['Comic_Sans_MS']">
       <div className="mx-auto max-w-5xl border-[3px] border-[#c0c0c0] bg-[#000033] p-3 sm:border-[5px] sm:p-6">
         <header className="border-[3px] border-[#c0c0c0] bg-[#000066] p-4 text-center sm:p-7">
-          <div className="mb-2 font-mono text-xs tracking-[0.35em] text-yellow-300">
+          <div className="mb-2 font-mono text-xs tracking-[0.2em] sm:tracking-[0.35em] text-yellow-300">
             PERSONNEL FILE // JAKE MILAD
           </div>
           <RainbowText className="block text-4xl font-bold [text-shadow:2px_2px_#ff0000,_-2px_-2px_#0000ff] sm:text-6xl">

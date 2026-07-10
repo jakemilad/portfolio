@@ -59,7 +59,7 @@ export default function Hero() {
   return (
     <section
       id="era-hero"
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden bg-[var(--m-scope)] text-[var(--m-porcelain)]"
+      className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-[var(--m-scope)] text-[var(--m-porcelain)]"
     >
       {reduced ? (
         <HeroFallback />

@@ -83,8 +83,17 @@ export default function GlobalMusicPlayer() {
     }
   };
 
+  // On phones the full player + alert would sit on top of the page content,
+  // so start minimized and skip the alert there.
   useEffect(() => {
-    const timeoutId = setTimeout(() => playAudio({ showAlertOnBlock: true }), 100);
+    if (window.matchMedia('(max-width: 639px)').matches) {
+      setIsControlsMinimized(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const isPhone = window.matchMedia('(max-width: 639px)').matches;
+    const timeoutId = setTimeout(() => playAudio({ showAlertOnBlock: !isPhone }), 100);
 
     return () => clearTimeout(timeoutId);
   }, []);

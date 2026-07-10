@@ -47,7 +47,7 @@ const Portfolio = () => {
     <div className="min-h-screen bg-black text-green-400 font-['Comic_Sans_MS'] p-5">
       <div className="max-w-4xl mx-auto bg-[#000033] border-[5px] border-[#c0c0c0] border-solid p-8">
 
-        <RainbowText className="text-6xl font-bold block mb-3 [text-shadow:3px_3px_#ff0000,_-2px_-2px_#0000ff] text-center">
+        <RainbowText className="text-4xl sm:text-6xl font-bold block mb-3 [text-shadow:3px_3px_#ff0000,_-2px_-2px_#0000ff] text-center">
           Cool Stuff I've Built
         </RainbowText>
 
@@ -66,7 +66,7 @@ const Portfolio = () => {
               className="theme-project-card border-[3px] border-[#c0c0c0] border-solid bg-[#000066] p-6 transition-all"
             >
               <div className="mb-4 pb-3 border-b-2 border-[#c0c0c0]">
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex flex-wrap items-center gap-3 mb-2">
                   <span className="text-5xl">{project.emoji}</span>
                   <div className="text-left flex-1">
                     <h2 className="text-3xl font-bold" style={{ color: project.color }}>
