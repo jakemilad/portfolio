@@ -912,7 +912,11 @@ body {
   }
 
   .pokemon-battlefield {
-    min-height: 290px;
+    /* The 16/9 aspect-ratio transfers min-height into a ~516px min-width,
+       which overflows phone screens — use a fixed portrait-friendly height. */
+    aspect-ratio: auto;
+    min-height: 0;
+    height: 300px;
   }
 
   .pokemon-status {
