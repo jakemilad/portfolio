@@ -1238,3 +1238,240 @@ html[data-era="2026"] #time-machine [role="button"] {
     animation: none !important;
   }
 }
+
+/* ================================================================== */
+/*  Dice roller — data visualization                                   */
+/*                                                                     */
+/*  Series colors are the validated categorical slots 1 and 2 stepped  */
+/*  for a dark surface. Every --theme-stage in this file is darker     */
+/*  than the #1a1a19 they were validated against, so contrast only     */
+/*  improves across themes. Do not swap these for theme vars: the      */
+/*  themes are chosen for mood, these are chosen to stay separable     */
+/*  under color-vision deficiency (worst-pair CVD dE 26.8).            */
+/* ================================================================== */
+
+.viz-root {
+  color-scheme: dark;
+  --surface-1: var(--theme-stage, #0a0a0a);
+  --surface-2: rgba(255, 255, 255, 0.035);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --viz-ref: #8b8b85;
+  --viz-ink-1: var(--theme-contrast, #fff);
+  --viz-ink-2: rgba(255, 255, 255, 0.68);
+  --viz-ink-3: rgba(255, 255, 255, 0.45);
+  --viz-grid: rgba(255, 255, 255, 0.09);
+  --viz-good: #3fb950;
+  --viz-warning: #d29922;
+  --viz-critical: #f85149;
+
+  font-family: var(--font-geist, ui-sans-serif), system-ui, sans-serif;
+  color: var(--viz-ink-2);
+}
+
+.viz-ink-1 { color: var(--viz-ink-1); }
+.viz-ink-2 { color: var(--viz-ink-2); }
+
+.viz-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--viz-ink-3);
+}
+
+.viz-card {
+  background: var(--surface-1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.875rem 1rem 1rem;
+}
+
+.viz-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--viz-ink-1);
+  letter-spacing: 0.01em;
+}
+
+.viz-sub {
+  font-size: 0.6875rem;
+  color: var(--viz-ink-3);
+  margin: 0.125rem 0 0.625rem;
+  line-height: 1.45;
+}
+
+.viz-facet {
+  background: var(--surface-2);
+  border-radius: 5px;
+  padding: 0.625rem 0.75rem 0.5rem;
+}
+
+/* --- SVG chrome: hairline, solid, recessive --- */
+.viz-grid,
+.viz-axis-line {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.viz-ref-line {
+  stroke: var(--viz-ref);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.viz-axis,
+.viz-axis-sm,
+.viz-axis-note,
+.viz-value {
+  fill: var(--viz-ink-3);
+  font-family: var(--font-geist-mono, ui-monospace), monospace;
+}
+
+.viz-axis { font-size: 11px; }
+.viz-axis-sm { font-size: 9px; }
+.viz-axis-note { font-size: 9px; fill: var(--viz-ink-3); }
+.viz-value { font-size: 11px; font-weight: 600; fill: var(--viz-ink-1); }
+
+/* 2px surface ring keeps dots legible where they overlap the line */
+.viz-dot {
+  stroke: var(--surface-1);
+  stroke-width: 2;
+}
+
+/* --- Tooltip --- */
+.viz-tooltip {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  min-width: 118px;
+  padding: 0.375rem 0.5rem;
+  border-radius: 5px;
+  background: #101014;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* --- Stat tiles --- */
+.viz-tile {
+  background: var(--surface-1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.625rem 0.75rem;
+}
+
+.viz-tile__label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--viz-ink-3);
+}
+
+.viz-tile__value {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--viz-ink-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.viz-tile__note {
+  font-size: 0.625rem;
+  color: var(--viz-ink-3);
+  margin-top: 0.0625rem;
+}
+
+.viz-tone--good { color: var(--viz-good); }
+.viz-tone--warning { color: var(--viz-warning); }
+.viz-tone--critical { color: var(--viz-critical); }
+.viz-tone--neutral { color: var(--viz-ink-1); }
+
+/* Status chips ship with a label, never color alone */
+.viz-chip {
+  font-size: 0.5625rem;
+  padding: 0.0625rem 0.3125rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.viz-chip--good { color: var(--viz-good); }
+.viz-chip--warning { color: var(--viz-warning); }
+.viz-chip--critical { color: var(--viz-critical); }
+.viz-chip--neutral { color: var(--viz-ink-3); }
+
+/* --- Buttons --- */
+.viz-btn,
+.viz-toggle {
+  font-size: 0.6875rem;
+  padding: 0.3125rem 0.6875rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--surface-2);
+  color: var(--viz-ink-2);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.viz-btn:hover,
+.viz-toggle:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--viz-ink-1);
+}
+
+.viz-toggle--on {
+  background: var(--viz-ink-1);
+  color: #0a0a0a;
+  border-color: var(--viz-ink-1);
+}
+
+.viz-btn--quiet {
+  color: var(--viz-ink-3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Table view --- */
+.viz-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  font-family: var(--font-geist-mono, ui-monospace), monospace;
+}
+
+.viz-table th {
+  text-align: right;
+  font-weight: 600;
+  color: var(--viz-ink-3);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.375rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.viz-table th:first-child,
+.viz-table td:first-child { text-align: left; }
+
+.viz-table td {
+  text-align: right;
+  padding: 0.3125rem 0.5rem;
+  color: var(--viz-ink-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.viz-table tfoot td {
+  color: var(--viz-ink-1);
+  font-weight: 600;
+  border-bottom: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* The two wide charts use a 640-unit viewBox, so on a phone they render at
+   roughly half scale and 11px axis text lands near 5px. Bump the in-SVG type
+   so it scales back to a readable size; the facets already render near 1:1. */
+@media (max-width: 640px) {
+  .viz-axis { font-size: 19px; }
+  .viz-value { font-size: 19px; }
+  .viz-axis-note { font-size: 15px; }
+}
