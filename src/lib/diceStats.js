@@ -172,18 +172,25 @@ const csvCell = (v) => {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 };
 
-/** Long format: one row per die per roll. Pivots cleanly in any spreadsheet. */
+/**
+ * Long format: one row per die per roll. Pivots cleanly in any spreadsheet.
+ *
+ * Player columns appear only when the log carries attribution (rolls made
+ * inside a Catan game), so the standalone roller's export keeps its shape.
+ */
 export function toCSV(rolls) {
+  const attributed = rolls.some((r) => r.playerId);
   const header = ['roll', 'timestamp', 'dice_count', 'die_index', 'face', 'roll_sum'];
+  if (attributed) header.push('player', 'player_id', 'turn', 'round');
   const lines = [header.join(',')];
 
   rolls.forEach((r, i) => {
     r.dice.forEach((face, d) => {
-      lines.push(
-        [i + 1, new Date(r.t).toISOString(), r.dice.length, d + 1, face, r.sum]
-          .map(csvCell)
-          .join(',')
-      );
+      const row = [i + 1, new Date(r.t).toISOString(), r.dice.length, d + 1, face, r.sum];
+      if (attributed) {
+        row.push(r.playerName ?? '', r.playerId ?? '', r.turn ?? '', r.round ?? '');
+      }
+      lines.push(row.map(csvCell).join(','));
     });
   });
 
@@ -191,10 +198,11 @@ export function toCSV(rolls) {
 }
 
 export function toJSON(rolls) {
+  const attributed = rolls.some((r) => r.playerId);
   return JSON.stringify(
     {
       exportedAt: new Date().toISOString(),
-      source: 'dice-of-catan',
+      source: attributed ? 'dice-of-catan/game' : 'dice-of-catan',
       generator: 'crypto.getRandomValues (rejection sampled, unbiased)',
       rollCount: rolls.length,
       rolls: rolls.map((r, i) => ({
@@ -203,6 +211,14 @@ export function toJSON(rolls) {
         diceCount: r.dice.length,
         dice: r.dice,
         sum: r.sum,
+        ...(attributed
+          ? {
+              player: r.playerName ?? null,
+              playerId: r.playerId ?? null,
+              turn: r.turn ?? null,
+              round: r.round ?? null,
+            }
+          : {}),
       })),
     },
     null,
